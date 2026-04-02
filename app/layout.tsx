@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className={`${geistSans.variable} antialiased`}>
       <body className="min-h-screen">
-        <main className="min-h-screen pb-20">
+        <main className="min-h-screen pb-20 md:pb-0">
           {children}
         </main>
         <BottomNav />

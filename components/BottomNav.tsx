@@ -16,7 +16,7 @@ export default function BottomNav() {
   if (pathname.startsWith("/admin")) return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 app-bottom-nav">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 app-bottom-nav md:hidden">
       <div className="flex items-center justify-around px-2 py-2 pb-[max(env(safe-area-inset-bottom,0px),8px)]">
         {tabs.map(({ href, label, icon: Icon }) => {
           const active =
