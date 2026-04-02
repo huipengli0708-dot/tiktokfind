@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import BottomNav from "@/components/BottomNav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,19 +17,24 @@ export const metadata: Metadata = {
   keywords: ["TikTok选品", "爆款商品", "跨境电商", "TikTok Shop", "选品工具"],
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1 pt-16">
+    <html lang="zh-CN" className={`${geistSans.variable} antialiased`}>
+      <body className="min-h-screen">
+        <main className="min-h-screen pb-20">
           {children}
         </main>
-        <Footer />
+        <BottomNav />
       </body>
     </html>
   );

@@ -297,3 +297,54 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.35);
 }
+
+/* ===== DARK APP THEME ===== */
+
+/* Main dark background */
+.app-bg {
+  background: linear-gradient(160deg, #0E0C1F 0%, #100E26 45%, #0D1520 100%);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Empty banner placeholder */
+.app-banner-empty {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Feed item card */
+.app-feed-card {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Feature card – purple */
+.app-card-purple {
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.75) 0%, rgba(67, 20, 158, 0.9) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 4px 20px rgba(109, 40, 217, 0.2);
+}
+
+/* Feature card – teal */
+.app-card-teal {
+  background: linear-gradient(135deg, rgba(6, 95, 70, 0.8) 0%, rgba(4, 55, 55, 0.9) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(6, 95, 70, 0.25);
+}
+
+/* Feature card – neutral dark */
+.app-card-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Bottom navigation bar */
+.app-bottom-nav {
+  background: rgba(12, 10, 26, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
