@@ -78,9 +78,9 @@ export default function VideoCard({ video, variant = "default" }: VideoCardProps
         </div>
 
         {/* 内容区 */}
-        <div className="p-4">
-          {/* 标签行：新手友好 + 原标签 */}
-          <div className="flex flex-wrap gap-1.5 mb-2.5">
+        <div className="p-2.5 sm:p-4">
+          {/* 标签行：新手友好 + 原标签 — 仅桌面显示 */}
+          <div className="hidden sm:flex flex-wrap gap-1.5 mb-2.5">
             {video.beginnerFriendly && (
               <span className="tag-pill-beginner">✦ 新手友好</span>
             )}
@@ -91,27 +91,27 @@ export default function VideoCard({ video, variant = "default" }: VideoCardProps
 
           {/* 标题 */}
           <h3 className={cn(
-            "font-semibold text-gray-800 leading-snug mb-2 group-hover:text-indigo-600 transition-colors",
-            isFeatured ? "text-base" : "text-[14px]"
+            "font-semibold text-gray-800 leading-snug mb-2 group-hover:text-indigo-600 transition-colors line-clamp-2",
+            isFeatured ? "text-base" : "text-[13px] sm:text-[14px]"
           )}>
             {video.title}
           </h3>
 
-          {/* 爆点结论（一句话冲击力） */}
-          <p className="text-xs font-medium text-indigo-700/80 bg-indigo-50/70 border border-indigo-100/60 rounded-lg px-3 py-1.5 leading-relaxed mb-3">
+          {/* 爆点结论 — 仅桌面显示 */}
+          <p className="hidden sm:block text-xs font-medium text-indigo-700/80 bg-indigo-50/70 border border-indigo-100/60 rounded-lg px-3 py-1.5 leading-relaxed mb-3">
             💡 {video.punchline}
           </p>
 
           {/* 底部行 */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
+          <div className="flex items-center justify-between mt-1">
+            <div className="hidden sm:flex items-center gap-1.5">
               <span className="text-[11px] text-gray-400">利润率</span>
               <span className="text-[11px] font-semibold text-emerald-600">
                 {video.analysis.profitMargin}
               </span>
             </div>
-            <span className="flex items-center gap-0.5 text-indigo-600 text-xs font-medium group-hover:gap-1.5 transition-all">
-              查看分析 <ArrowRight size={11} />
+            <span className="flex items-center gap-0.5 text-indigo-600 text-[11px] sm:text-xs font-medium group-hover:gap-1.5 transition-all sm:ml-auto">
+              查看 <ArrowRight size={10} />
             </span>
           </div>
         </div>
