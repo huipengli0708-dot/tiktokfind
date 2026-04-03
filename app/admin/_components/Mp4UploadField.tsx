@@ -8,14 +8,58 @@ const BUCKET = "videos"
 
 interface Props {
   defaultValue?: string
+  /** Called with the Supabase public URL after a successful upload */
+  onCoverGenerated?: (coverUrl: string) => void
 }
 
 type Status = "idle" | "uploading" | "done" | "error"
 
-export default function Mp4UploadField({ defaultValue = "" }: Props) {
+/** Extract the first visible frame from a video File as a JPEG Blob */
+function extractFirstFrame(file: File): Promise<Blob | null> {
+  return new Promise((resolve) => {
+    const video = document.createElement("video")
+    video.muted = true
+    video.playsInline = true
+    video.preload = "auto"
+
+    const objectUrl = URL.createObjectURL(file)
+    video.src = objectUrl
+
+    const cleanup = () => URL.revokeObjectURL(objectUrl)
+
+    video.addEventListener(
+      "seeked",
+      () => {
+        const canvas = document.createElement("canvas")
+        canvas.width = video.videoWidth || 720
+        canvas.height = video.videoHeight || 1280
+        const ctx = canvas.getContext("2d")
+        if (!ctx) { cleanup(); resolve(null); return }
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        canvas.toBlob(
+          (blob) => { cleanup(); resolve(blob) },
+          "image/jpeg",
+          0.85
+        )
+      },
+      { once: true }
+    )
+
+    video.addEventListener("error", () => { cleanup(); resolve(null) }, { once: true })
+
+    video.addEventListener(
+      "loadedmetadata",
+      () => { video.currentTime = 0.1 },
+      { once: true }
+    )
+  })
+}
+
+export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: Props) {
   const [url, setUrl] = useState(defaultValue)
   const [status, setStatus] = useState<Status>("idle")
   const [errMsg, setErrMsg] = useState("")
+  const [coverStatus, setCoverStatus] = useState<"idle" | "generating" | "done" | "failed">("idle")
   const fileRef = useRef<HTMLInputElement>(null)
 
   async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -23,11 +67,8 @@ export default function Mp4UploadField({ defaultValue = "" }: Props) {
     if (!file) return
 
     if (file.type !== "video/mp4") {
-      setStatus("error")
-      setErrMsg("只支持 MP4 格式")
-      return
+      setStatus("error"); setErrMsg("只支持 MP4 格式"); return
     }
-
     if (file.size > MAX_SIZE) {
       setStatus("error")
       setErrMsg(`文件超过 50MB（当前 ${(file.size / 1024 / 1024).toFixed(1)} MB）`)
@@ -37,23 +78,46 @@ export default function Mp4UploadField({ defaultValue = "" }: Props) {
     setStatus("uploading")
     setErrMsg("")
 
-    // Path inside the bucket — no leading folder prefix to avoid "videos/videos/…" in URL
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_")
-    const path = `${Date.now()}-${safeName}`
+    const ts = Date.now()
+    const videoPath = `${ts}-${safeName}`
 
     const { error: uploadError } = await supabase.storage
       .from(BUCKET)
-      .upload(path, file, { contentType: "video/mp4", upsert: false })
+      .upload(videoPath, file, { contentType: "video/mp4", upsert: false })
 
     if (uploadError) {
-      setStatus("error")
-      setErrMsg(uploadError.message)
-      return
+      setStatus("error"); setErrMsg(uploadError.message); return
     }
 
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(path)
-    setUrl(data.publicUrl)
+    const { data: videoData } = supabase.storage.from(BUCKET).getPublicUrl(videoPath)
+    setUrl(videoData.publicUrl)
     setStatus("done")
+
+    // ── Auto-generate cover from first frame ──
+    if (onCoverGenerated) {
+      setCoverStatus("generating")
+      try {
+        const frameBlob = await extractFirstFrame(file)
+        if (frameBlob) {
+          const coverPath = `covers/${ts}-${safeName.replace(/\.mp4$/i, "")}.jpg`
+          const { error: coverErr } = await supabase.storage
+            .from(BUCKET)
+            .upload(coverPath, frameBlob, { contentType: "image/jpeg", upsert: false })
+          if (!coverErr) {
+            const { data: coverData } = supabase.storage.from(BUCKET).getPublicUrl(coverPath)
+            onCoverGenerated(coverData.publicUrl)
+            setCoverStatus("done")
+          } else {
+            setCoverStatus("failed")
+          }
+        } else {
+          setCoverStatus("failed")
+        }
+      } catch {
+        setCoverStatus("failed")
+      }
+    }
   }
 
   const inputCls =
@@ -65,10 +129,9 @@ export default function Mp4UploadField({ defaultValue = "" }: Props) {
         MP4 视频文件（来源=mp4时）
       </label>
 
-      {/* This hidden input is what the server action reads via formData.get("video_file_url") */}
+      {/* Hidden input the server action reads */}
       <input type="hidden" name="video_file_url" value={url} />
 
-      {/* File picker trigger */}
       <div className="flex items-center gap-3">
         <button
           type="button"
@@ -78,31 +141,26 @@ export default function Mp4UploadField({ defaultValue = "" }: Props) {
         >
           {status === "uploading" ? "上传中…" : "选择 MP4 文件"}
         </button>
-        <input
-          ref={fileRef}
-          type="file"
-          accept="video/mp4"
-          className="hidden"
-          onChange={handleFileChange}
-        />
+        <input ref={fileRef} type="file" accept="video/mp4" className="hidden" onChange={handleFileChange} />
         <span className="text-[11px] text-gray-400">最大 50 MB，仅限 MP4</span>
       </div>
 
-      {/* Upload progress bar */}
       {status === "uploading" && (
         <div className="h-1.5 w-full rounded-full bg-white/40 overflow-hidden">
           <div className="h-full bg-indigo-400 animate-pulse w-2/3 rounded-full" />
         </div>
       )}
-
       {status === "done" && (
-        <p className="text-[11px] text-emerald-600 font-medium">✓ 上传成功</p>
+        <p className="text-[11px] text-emerald-600 font-medium">
+          ✓ 视频上传成功
+          {coverStatus === "generating" && " · 封面生成中…"}
+          {coverStatus === "done" && " · 封面已自动生成"}
+          {coverStatus === "failed" && " · 封面提取失败（将使用空白封面）"}
+        </p>
       )}
-      {status === "error" && (
-        <p className="text-[11px] text-rose-500">✗ {errMsg}</p>
-      )}
+      {status === "error" && <p className="text-[11px] text-rose-500">✗ {errMsg}</p>}
 
-      {/* Manual URL fallback — shares the same state as the hidden input */}
+      {/* Manual URL fallback */}
       <div>
         <label className="block text-[11px] text-gray-400 mb-1">或手动输入 MP4 链接</label>
         <input

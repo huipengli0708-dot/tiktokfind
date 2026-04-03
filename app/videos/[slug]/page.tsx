@@ -69,58 +69,72 @@ export default async function VideoDetailPage({ params }: Props) {
 
         {/* 封面 + 基础信息 */}
         <div className="glass-card rounded-3xl overflow-hidden mb-6">
-          {/* 封面图 / 视频区 */}
+          {/* 封面图 / 视频区 — 9:16 竖版布局 */}
           {video.video_source_type === "mp4" && video.video_file_url ? (
-            <div className="relative bg-black">
-              <video
-                src={video.video_file_url}
-                controls
-                playsInline
-                className="w-full max-h-80 object-contain"
-                poster={video.coverImage}
-              />
-              {/* 分类角标 */}
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/50 backdrop-blur-md border border-white/20">
-                  {video.category}
-                </span>
-              </div>
-              {/* 数据角标 */}
-              <div className="absolute bottom-4 right-4 flex items-center gap-3">
-                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
-                  <Eye size={11} /> {formatViewCount(video.viewCount)}
-                </span>
-                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
-                  <Heart size={11} /> {formatViewCount(video.likeCount)}
-                </span>
+            /* MP4: centered vertical player, max 65vh tall */
+            <div className="relative bg-black flex justify-center">
+              <div className="relative w-full max-w-sm">
+                <video
+                  src={video.video_file_url}
+                  controls
+                  playsInline
+                  className="w-full aspect-[9/16] max-h-[65vh] object-contain"
+                  poster={video.coverImage || undefined}
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/50 backdrop-blur-md border border-white/20">
+                    {video.category}
+                  </span>
+                </div>
+                <div className="absolute bottom-4 right-4 flex items-center gap-3">
+                  <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
+                    <Eye size={11} /> {formatViewCount(video.viewCount)}
+                  </span>
+                  <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
+                    <Heart size={11} /> {formatViewCount(video.likeCount)}
+                  </span>
+                </div>
               </div>
             </div>
           ) : (
-            <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
-              <Image
-                src={video.coverImage}
-                alt={video.title}
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-
-              {/* 播放按钮占位 */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-all hover:scale-105">
-                  <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-white ml-1" />
+            /* TikTok / static cover — 9:16 with fallback placeholder */
+            <div className="relative aspect-[9/16] max-h-[65vh] overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+              {video.coverImage ? (
+                <>
+                  <Image
+                    src={video.coverImage}
+                    alt={video.title}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                </>
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="flex flex-col items-center gap-3 text-gray-400">
+                    <div className="w-16 h-16 rounded-full bg-white/60 flex items-center justify-center">
+                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-indigo-400 ml-1" />
+                    </div>
+                    <span className="text-xs">暂无封面</span>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* 分类 */}
+              {/* 播放按钮占位 (only when cover exists) */}
+              {video.coverImage && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-all hover:scale-105">
+                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-white ml-1" />
+                  </div>
+                </div>
+              )}
+
               <div className="absolute top-4 left-4">
                 <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/30 backdrop-blur-md border border-white/20">
                   {video.category}
                 </span>
               </div>
-
-              {/* 数据角标 */}
               <div className="absolute bottom-4 right-4 flex items-center gap-3">
                 <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
                   <Eye size={11} /> {formatViewCount(video.viewCount)}

@@ -21,15 +21,24 @@ export default function VideoCard({ video, variant = "default" }: VideoCardProps
           isFeatured && "rounded-3xl"
         )}
       >
-        {/* 封面图 */}
-        <div className={cn("relative overflow-hidden", isFeatured ? "h-56" : "h-48")}>
-          <Image
-            src={video.coverImage}
-            alt={video.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+        {/* 封面图 — 9:16 竖版比例 */}
+        <div className="relative aspect-[9/16] overflow-hidden">
+          {video.coverImage ? (
+            <Image
+              src={video.coverImage}
+              alt={video.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 flex flex-col items-center justify-center gap-2">
+              <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center">
+                <div className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px] border-l-indigo-400 ml-1" />
+              </div>
+              <span className="text-[11px] text-gray-400">暂无封面</span>
+            </div>
+          )}
           {/* 渐变遮罩 */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
