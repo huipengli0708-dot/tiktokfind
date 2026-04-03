@@ -26,46 +26,48 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
       <div className="fixed top-80 -left-24 w-80 h-80 bg-blue-500/[0.06] rounded-full blur-[80px] pointer-events-none" />
 
       {/* ─── Hero ─────────────────────────────────── */}
-      {/* Note: layout.tsx adds md:pt-16 to clear the fixed navbar */}
-      <section className="pt-14 pb-20 px-8 max-w-6xl mx-auto">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/15 border border-violet-500/25 text-violet-300 text-xs font-medium mb-8 mt-2">
+      {/* layout.tsx adds md:pt-16 to clear the fixed navbar */}
+      <section className="pt-14 pb-16 px-8 max-w-6xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] border border-white/[0.1] text-white/55 text-xs font-medium mb-8 mt-2">
           <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
           每周更新 · TikTok 爆款研究
         </div>
 
-        <div className="max-w-2xl mb-10">
-          <h1 className="text-5xl font-bold text-white leading-[1.15] tracking-tight mb-6">
-            别再试错了，
+        <div className="max-w-2xl mb-8">
+          <h1 className="text-5xl font-bold text-white leading-[1.15] tracking-tight mb-5">
+            每周精选 TikTok 爆款，
             <br />
-            <span className="bg-gradient-to-r from-violet-400 via-blue-400 to-violet-400 bg-clip-text text-transparent">
-              直接复制已验证爆款
+            <span className="text-white/70 font-normal text-4xl">
+              附完整选品分析与内容打法
             </span>
           </h1>
-          <p className="text-white/50 text-lg leading-relaxed">
-            每周精选 TikTok 真实跑出来的爆款，完整拆解选品逻辑、内容打法和利润数据，
-            拿来直接用，不需要从零摸索。
+          <p className="text-white/45 text-base leading-relaxed">
+            深入拆解每个爆款背后的市场逻辑、内容策略和利润空间。
+            看懂一个商品，建立你自己的选品判断力。
           </p>
         </div>
 
-        {/* ── Primary CTAs ── */}
-        <div className="flex items-center gap-4 mb-14">
-          <Link
-            href="/videos"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 transition-all shadow-[0_4px_20px_rgba(139,92,246,0.35)] hover:shadow-[0_6px_28px_rgba(139,92,246,0.5)] hover:-translate-y-0.5 text-sm"
-          >
-            查看爆款视频 <ArrowRight size={15} />
-          </Link>
-          <Link
-            href="/tool"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-medium text-white/70 bg-white/[0.07] border border-white/[0.12] hover:bg-white/[0.11] hover:text-white transition-all text-sm"
-          >
-            获取选品工具
-          </Link>
+        {/* Single primary CTA → content */}
+        <div className="flex flex-col gap-3 mb-2">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/videos"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-semibold text-white bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-500 hover:to-blue-500 transition-all shadow-[0_4px_20px_rgba(139,92,246,0.3)] hover:-translate-y-0.5 text-sm"
+            >
+              查看爆款视频 <ArrowRight size={15} />
+            </Link>
+          </div>
+          {/* Tool is secondary — text link only */}
+          <p className="text-white/25 text-xs ml-1">
+            需要系统化选品工具？
+            <Link href="/tool" className="text-white/40 hover:text-white/60 underline underline-offset-2 ml-1 transition-colors">
+              了解选品工具 →
+            </Link>
+          </p>
         </div>
 
-        {/* Stats strip */}
-        <div className="flex items-center gap-10 pt-8 border-t border-white/[0.07]">
+        {/* Stats — context, not conversion */}
+        <div className="flex items-center gap-10 mt-12 pt-8 border-t border-white/[0.07]">
           {[
             { value: `${totalVideos}+`, label: "爆款案例" },
             { value: String(avgScore), label: "平均爆款指数" },
@@ -73,25 +75,25 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
           ].map(({ value, label }) => (
             <div key={label}>
               <p className="text-2xl font-bold text-white tabular-nums">{value}</p>
-              <p className="text-white/38 text-sm mt-0.5">{label}</p>
+              <p className="text-white/35 text-sm mt-0.5">{label}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ─── Featured video grid ──────────────────── */}
+      {/* ─── Video grid — the actual product ────── */}
       {previewVideos.length > 0 && (
         <section className="px-8 pb-24 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-white text-xl font-bold">今日精选爆款</h2>
-              <p className="text-white/35 text-sm mt-0.5">每周更新，附完整选品分析</p>
+              <h2 className="text-white text-xl font-bold">本期精选爆款</h2>
+              <p className="text-white/35 text-sm mt-0.5">点击任意商品查看完整分析</p>
             </div>
             <Link
               href="/videos"
-              className="flex items-center gap-1.5 text-sm text-violet-400 hover:text-violet-300 transition-colors font-medium"
+              className="flex items-center gap-1.5 text-sm text-white/40 hover:text-white/65 transition-colors"
             >
-              查看全部 <ArrowRight size={14} />
+              全部 {totalVideos} 个 <ArrowRight size={13} />
             </Link>
           </div>
 
@@ -107,46 +109,52 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
                 <Link
                   key={video.id}
                   href={`/videos/${video.slug}`}
-                  className="group relative rounded-2xl overflow-hidden h-64 app-desktop-card hover:border-white/15 transition-colors"
+                  className="group relative rounded-2xl overflow-hidden h-72 app-desktop-card hover:border-white/15 transition-colors"
                 >
                   <Image
                     src={video.coverImage}
                     alt={video.title}
                     fill
-                    className="object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
+                    className="object-cover opacity-60 group-hover:opacity-78 transition-opacity duration-300"
                     sizes="(max-width: 1280px) 33vw, 400px"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent" />
 
-                  {/* Top badges */}
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                    {video.content_type && (
-                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-violet-500/40 text-violet-200 border border-violet-400/20 backdrop-blur-sm font-medium">
-                        {video.content_type}
-                      </span>
-                    )}
-                  </div>
+                  {/* Trend score */}
                   <div className="absolute top-3 right-3">
-                    <span className="inline-flex items-center gap-0.5 text-xs font-bold text-amber-400 bg-black/40 backdrop-blur-sm px-2 py-0.5 rounded-full border border-amber-400/20">
+                    <span className="inline-flex items-center gap-0.5 text-xs font-bold text-amber-400 bg-black/50 backdrop-blur-sm px-2 py-0.5 rounded-full border border-amber-400/20">
                       <Flame size={10} /> {video.analysis.trendScore}
                     </span>
                   </div>
 
-                  {/* Bottom info */}
+                  {/* Content type */}
+                  {video.content_type && (
+                    <div className="absolute top-3 left-3">
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/40 text-white/65 border border-white/15 backdrop-blur-sm">
+                        {video.content_type}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Info overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-white font-semibold text-sm leading-snug line-clamp-2 mb-2">
+                    {/* Category */}
+                    <span className="text-white/45 text-[11px] mb-1.5 block">{video.category}</span>
+                    {/* Title */}
+                    <p className="text-white font-semibold text-sm leading-snug line-clamp-2 mb-3">
                       {video.title}
                     </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-white/50 text-xs">{video.category}</span>
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-emerald-400 text-xs font-medium">
-                          {video.analysis.profitMargin.split("，")[0]}
-                        </span>
-                        <span className={`text-xs font-medium ${competitionColor}`}>
-                          {video.analysis.competitionLevel}竞争
-                        </span>
-                      </div>
+                    {/* Key metrics — learning info */}
+                    <div className="flex items-center gap-3 text-xs">
+                      <span className="text-emerald-400 font-medium">
+                        {video.analysis.profitMargin.split("，")[0]}
+                      </span>
+                      <span className={`font-medium ${competitionColor}`}>
+                        {video.analysis.competitionLevel}竞争
+                      </span>
+                      <span className="text-white/35">
+                        {video.analysis.marketSize.split("，")[0].slice(0, 10)}
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -154,13 +162,12 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
             })}
           </div>
 
-          {/* Bottom CTA */}
           <div className="text-center mt-10">
             <Link
               href="/videos"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl text-sm font-medium text-white/65 bg-white/[0.06] border border-white/[0.1] hover:text-white hover:bg-white/[0.09] transition-all"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-2xl text-sm text-white/50 bg-white/[0.05] border border-white/[0.09] hover:text-white/75 hover:bg-white/[0.08] transition-all"
             >
-              查看全部爆款视频 <ArrowRight size={14} />
+              查看全部爆款分析 <ArrowRight size={13} />
             </Link>
           </div>
         </section>
