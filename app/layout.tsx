@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import BottomNav from "@/components/BottomNav";
+import DesktopNavbar from "@/components/desktop/DesktopNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,9 +32,15 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className={`${geistSans.variable} antialiased`}>
       <body className="min-h-screen">
-        <main className="min-h-screen pb-20 md:pb-0">
+        {/* Desktop top nav — hidden on mobile, hidden on /admin (handled internally) */}
+        <DesktopNavbar />
+
+        {/* md:pt-16 clears the fixed desktop navbar height (64px) */}
+        <main className="min-h-screen pb-20 md:pb-0 md:pt-16">
           {children}
         </main>
+
+        {/* Mobile bottom nav — md:hidden applied internally */}
         <BottomNav />
       </body>
     </html>

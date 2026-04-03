@@ -2,13 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Home, Play, Zap, User } from "lucide-react"
+import { Home, Play, Zap, Info } from "lucide-react"
 
 const tabs = [
   { href: "/", label: "首页", icon: Home },
-  { href: "/videos", label: "视频库", icon: Play },
+  { href: "/videos", label: "爆款", icon: Play },
   { href: "/tool", label: "工具", icon: Zap },
-  { href: "/admin/login", label: "我的", icon: User },
+  { href: "/contact", label: "关于", icon: Info },
 ] as const
 
 export default function BottomNav() {

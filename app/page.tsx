@@ -1,16 +1,16 @@
 import { getFeaturedVideos, getAllVideos } from "@/lib/db"
 import MobileHome from "@/components/mobile/MobileHome"
-import DesktopHome from "@/components/desktop/DesktopHome"
+import DesktopLanding from "@/components/desktop/DesktopLanding"
 
 export const revalidate = 60
 
 /**
  * Responsive homepage:
- *   < 768px (md)  → MobileHome  (dark app-style layout)
- *   ≥ 768px (md)  → DesktopHome (sidebar dashboard layout)
+ *   < 768px  → MobileHome    (app-style: banner + cards + feed + bottom nav)
+ *   ≥ 768px  → DesktopLanding (landing page: hero + CTAs + video grid + top nav)
  *
- * Both layouts receive the same server-fetched data.
- * CSS show/hide (md:hidden / hidden md:block) avoids hydration mismatches.
+ * Device detection is CSS-only (md:hidden / hidden md:block).
+ * Both layouts receive the same server-fetched Supabase data.
  */
 export default async function HomePage() {
   const [featuredVideos, allVideos] = await Promise.all([
@@ -20,14 +20,14 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ── Mobile (hidden on md+) ── */}
+      {/* Mobile — hidden on md+ */}
       <div className="md:hidden">
         <MobileHome featuredVideos={featuredVideos} allVideos={allVideos} />
       </div>
 
-      {/* ── Desktop (hidden below md) ── */}
+      {/* Desktop — hidden below md */}
       <div className="hidden md:block">
-        <DesktopHome featuredVideos={featuredVideos} allVideos={allVideos} />
+        <DesktopLanding featuredVideos={featuredVideos} allVideos={allVideos} />
       </div>
     </>
   )
