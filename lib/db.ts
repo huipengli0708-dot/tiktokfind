@@ -19,6 +19,8 @@ export type DbVideo = {
   profit_note: string | null
   recommendation_score: number | null
   content_type: string | null
+  video_source_type: string | null
+  video_file_url: string | null
   is_published: boolean
   is_featured: boolean
   sort_order: number | null
@@ -58,6 +60,8 @@ function mapDbVideo(row: DbVideo): VideoProduct {
     contentStrategy: Array.isArray(row.content_strategy) ? row.content_strategy : [],
     riskNotes: Array.isArray(row.risk_notes) ? row.risk_notes : [],
     content_type: row.content_type ?? null,
+    video_source_type: row.video_source_type ?? null,
+    video_file_url: row.video_file_url ?? null,
     isFeatured: row.is_featured,
     viewCount: (a.viewCount as number) ?? 0,
     likeCount: (a.likeCount as number) ?? 0,
@@ -152,9 +156,9 @@ export async function getVideoById(id: string): Promise<DbVideo | null> {
 
 export type InsertVideoPayload = Omit<DbVideo, 'id' | 'created_at'>
 
-export async function insertVideo(payload: InsertVideoPayload): Promise<{ error: string | null }> {
-  const { error } = await supabase.from('videos').insert(payload)
-  return { error: error?.message ?? null }
+export async function insertVideo(payload: InsertVideoPayload): Promise<{ id: string | null; error: string | null }> {
+  const { data, error } = await supabase.from('videos').insert(payload).select('id').single()
+  return { id: (data as { id: string } | null)?.id ?? null, error: error?.message ?? null }
 }
 
 export async function updateVideo(

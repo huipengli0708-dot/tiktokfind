@@ -1,9 +1,12 @@
 /** 新增 / 编辑视频的共享表单字段（Server Component） */
+import Mp4UploadField from "./Mp4UploadField"
 
 export interface FormDefaults {
   title?: string
   slug?: string
   video_url?: string | null
+  video_source_type?: string | null
+  video_file_url?: string | null
   cover_image?: string
   category?: string
   tags?: string[]
@@ -36,6 +39,7 @@ interface Props {
   defaults?: FormDefaults
 }
 
+const VIDEO_SOURCE_TYPES = ["tiktok", "mp4"] as const
 const CONTENT_TYPES = ["商家实拍", "达人", "AI"] as const
 const COMPETITION_LEVELS = ["低", "中", "高"] as const
 const RISK_LEVELS = ["低", "中", "高"] as const
@@ -54,8 +58,13 @@ export default function VideoFormFields({ defaults = {} }: Props) {
           hint="用于URL，只含小写字母和横线，不可重复" />
         <Field label="封面图链接 *" name="cover_image" required defaultValue={d.cover_image ?? ""}
           placeholder="https://images.unsplash.com/photo-xxx?w=600&h=800&fit=crop" />
-        <Field label="视频链接" name="video_url" defaultValue={d.video_url ?? ""}
-          placeholder="https://www.tiktok.com/..." />
+        <TwoCol>
+          <SelectField label="视频来源类型" name="video_source_type"
+            options={VIDEO_SOURCE_TYPES} defaultValue={d.video_source_type ?? "tiktok"} />
+          <Field label="TikTok链接（来源=tiktok时填写）" name="video_url" defaultValue={d.video_url ?? ""}
+            placeholder="https://www.tiktok.com/..." />
+        </TwoCol>
+        <Mp4UploadField defaultValue={d.video_file_url ?? ""} />
         <TwoCol>
           <Field label="分类 *" name="category" required defaultValue={d.category}
             placeholder="厨房好物 / 数码配件 / 家居生活" />

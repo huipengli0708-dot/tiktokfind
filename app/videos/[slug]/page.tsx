@@ -70,40 +70,67 @@ export default async function VideoDetailPage({ params }: Props) {
         {/* 封面 + 基础信息 */}
         <div className="glass-card rounded-3xl overflow-hidden mb-6">
           {/* 封面图 / 视频区 */}
-          <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
-            <Image
-              src={video.coverImage}
-              alt={video.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-
-            {/* 播放按钮占位 */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-all hover:scale-105">
-                <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-white ml-1" />
+          {video.video_source_type === "mp4" && video.video_file_url ? (
+            <div className="relative bg-black">
+              <video
+                src={video.video_file_url}
+                controls
+                playsInline
+                className="w-full max-h-80 object-contain"
+                poster={video.coverImage}
+              />
+              {/* 分类角标 */}
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/50 backdrop-blur-md border border-white/20">
+                  {video.category}
+                </span>
+              </div>
+              {/* 数据角标 */}
+              <div className="absolute bottom-4 right-4 flex items-center gap-3">
+                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
+                  <Eye size={11} /> {formatViewCount(video.viewCount)}
+                </span>
+                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
+                  <Heart size={11} /> {formatViewCount(video.likeCount)}
+                </span>
               </div>
             </div>
+          ) : (
+            <div className="relative h-64 md:h-80 overflow-hidden bg-gray-100">
+              <Image
+                src={video.coverImage}
+                alt={video.title}
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-            {/* 分类 */}
-            <div className="absolute top-4 left-4">
-              <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/30 backdrop-blur-md border border-white/20">
-                {video.category}
-              </span>
-            </div>
+              {/* 播放按钮占位 */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-all hover:scale-105">
+                  <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-white ml-1" />
+                </div>
+              </div>
 
-            {/* 数据角标 */}
-            <div className="absolute bottom-4 right-4 flex items-center gap-3">
-              <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
-                <Eye size={11} /> {formatViewCount(video.viewCount)}
-              </span>
-              <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
-                <Heart size={11} /> {formatViewCount(video.likeCount)}
-              </span>
+              {/* 分类 */}
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/30 backdrop-blur-md border border-white/20">
+                  {video.category}
+                </span>
+              </div>
+
+              {/* 数据角标 */}
+              <div className="absolute bottom-4 right-4 flex items-center gap-3">
+                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
+                  <Eye size={11} /> {formatViewCount(video.viewCount)}
+                </span>
+                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
+                  <Heart size={11} /> {formatViewCount(video.likeCount)}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 标题 + 标签 + 核心指标 */}
           <div className="p-5 md:p-7">
@@ -123,7 +150,7 @@ export default async function VideoDetailPage({ params }: Props) {
             <div className="grid grid-cols-3 gap-3 mb-5">
               <div className="glass-card rounded-xl p-3 text-center">
                 <div className="text-xs text-gray-400 mb-0.5">利润率</div>
-                <div className="font-bold text-sm text-emerald-600">{video.analysis.profitMargin}</div>
+                <div className="font-bold text-sm text-emerald-600">{video.analysis.profitMargin || "—"}</div>
               </div>
               <div className="glass-card rounded-xl p-3 text-center">
                 <div className="text-xs text-gray-400 mb-0.5">竞争度</div>
@@ -133,7 +160,7 @@ export default async function VideoDetailPage({ params }: Props) {
               </div>
               <div className="glass-card rounded-xl p-3 text-center">
                 <div className="text-xs text-gray-400 mb-0.5">市场规模</div>
-                <div className="font-bold text-[11px] text-gray-700 leading-tight">{video.analysis.marketSize.split('，')[0]}</div>
+                <div className="font-bold text-[11px] text-gray-700 leading-tight">{(video.analysis.marketSize || "待分析").split('，')[0]}</div>
               </div>
             </div>
 
@@ -150,16 +177,26 @@ export default async function VideoDetailPage({ params }: Props) {
             </div>
             <h2 className="text-base font-bold text-gray-900">爆点分析：为什么这个商品会爆？</h2>
           </div>
-          <div className="space-y-3">
-            {video.analysis.whyViral.map((point, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/50">
-                <span className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                  {i + 1}
-                </span>
-                <p className="text-sm text-gray-700 leading-relaxed">{point}</p>
-              </div>
-            ))}
-          </div>
+          {/* punchline — one-line summary from AI analysis */}
+          {video.punchline && (
+            <p className="text-sm font-medium text-indigo-700 bg-indigo-50/60 border border-indigo-100/60 rounded-xl px-4 py-2.5 mb-4 leading-relaxed">
+              {video.punchline}
+            </p>
+          )}
+          {video.analysis.whyViral.length > 0 ? (
+            <div className="space-y-3">
+              {video.analysis.whyViral.map((point, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/50">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                    {i + 1}
+                  </span>
+                  <p className="text-sm text-gray-700 leading-relaxed">{point}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400 italic">暂无分析数据</p>
+          )}
         </div>
 
         {/* ===== 适合人群 ===== */}
@@ -170,14 +207,18 @@ export default async function VideoDetailPage({ params }: Props) {
             </div>
             <h2 className="text-base font-bold text-gray-900">适合谁来做？</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {video.targetAudience.map((audience, i) => (
-              <div key={i} className="flex items-start gap-2 p-3 rounded-xl bg-emerald-50/60 border border-emerald-100/60">
-                <CheckCircle size={14} className="text-emerald-500 mt-0.5 shrink-0" />
-                <p className="text-sm text-gray-700">{audience}</p>
-              </div>
-            ))}
-          </div>
+          {video.targetAudience.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {video.targetAudience.map((audience, i) => (
+                <div key={i} className="flex items-start gap-2 p-3 rounded-xl bg-emerald-50/60 border border-emerald-100/60">
+                  <CheckCircle size={14} className="text-emerald-500 mt-0.5 shrink-0" />
+                  <p className="text-sm text-gray-700">{audience}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400 italic">暂无分析数据</p>
+          )}
         </div>
 
         {/* ===== 内容打法建议 ===== */}
@@ -188,14 +229,18 @@ export default async function VideoDetailPage({ params }: Props) {
             </div>
             <h2 className="text-base font-bold text-gray-900">内容打法建议</h2>
           </div>
-          <div className="space-y-3">
-            {video.contentStrategy.map((strategy, i) => (
-              <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-purple-50/50 border border-purple-100/60">
-                <Target size={14} className="text-purple-500 mt-0.5 shrink-0" />
-                <p className="text-sm text-gray-700 leading-relaxed">{strategy}</p>
-              </div>
-            ))}
-          </div>
+          {video.contentStrategy.length > 0 ? (
+            <div className="space-y-3">
+              {video.contentStrategy.map((strategy, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-purple-50/50 border border-purple-100/60">
+                  <Target size={14} className="text-purple-500 mt-0.5 shrink-0" />
+                  <p className="text-sm text-gray-700 leading-relaxed">{strategy}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-gray-400 italic">暂无分析数据</p>
+          )}
         </div>
 
         {/* ===== 市场数据 ===== */}
@@ -209,11 +254,11 @@ export default async function VideoDetailPage({ params }: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
               <div className="text-xs text-gray-400 mb-1">市场规模</div>
-              <p className="text-sm font-medium text-gray-700">{video.analysis.marketSize}</p>
+              <p className="text-sm font-medium text-gray-700">{video.analysis.marketSize || "暂无分析数据"}</p>
             </div>
             <div className="p-3 rounded-xl bg-blue-50/50 border border-blue-100/60">
               <div className="text-xs text-gray-400 mb-1">预估利润率</div>
-              <p className="text-sm font-semibold text-emerald-600">{video.analysis.profitMargin}</p>
+              <p className="text-sm font-semibold text-emerald-600">{video.analysis.profitMargin || "暂无分析数据"}</p>
             </div>
           </div>
         </div>
@@ -293,14 +338,18 @@ export default async function VideoDetailPage({ params }: Props) {
             </div>
             <h2 className="text-base font-bold text-gray-900">风险提醒</h2>
           </div>
-          <div className="space-y-2.5">
-            {video.riskNotes.map((note, i) => (
-              <div key={i} className="flex items-start gap-2 text-sm text-amber-800">
-                <span className="text-amber-500 font-bold mt-0.5">!</span>
-                <p className="leading-relaxed">{note}</p>
-              </div>
-            ))}
-          </div>
+          {video.riskNotes.length > 0 ? (
+            <div className="space-y-2.5">
+              {video.riskNotes.map((note, i) => (
+                <div key={i} className="flex items-start gap-2 text-sm text-amber-800">
+                  <span className="text-amber-500 font-bold mt-0.5">!</span>
+                  <p className="leading-relaxed">{note}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-amber-700/60 italic">暂无分析数据</p>
+          )}
         </div>
 
         {/* ===== CTA ===== */}

@@ -28,6 +28,8 @@ export interface VideoProduct {
   contentStrategy: string[]
   riskNotes: string[]
   content_type?: string | null
+  video_source_type?: string | null
+  video_file_url?: string | null
   isFeatured: boolean
   viewCount: number
   likeCount: number

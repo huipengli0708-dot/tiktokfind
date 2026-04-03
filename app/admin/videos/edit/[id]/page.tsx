@@ -20,6 +20,8 @@ export default async function EditVideoPage({ params }: Props) {
     title: video.title,
     slug: video.slug,
     video_url: video.video_url,
+    video_source_type: video.video_source_type,
+    video_file_url: video.video_file_url,
     cover_image: video.cover_image,
     category: video.category,
     tags: video.tags,
