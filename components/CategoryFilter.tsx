@@ -19,7 +19,7 @@ export default function CategoryFilter({ categories, selected, onChange }: Categ
             "px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
             selected === cat
               ? "btn-gradient shadow-md"
-              : "glass-card border border-white/40 text-gray-600 hover:text-gray-900 hover:bg-white/80"
+              : "glass-card border border-white/10 text-gray-300 hover:text-white hover:bg-white/10"
           )}
         >
           {cat}
