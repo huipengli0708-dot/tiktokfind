@@ -393,3 +393,92 @@
   border: 1px solid rgba(139, 92, 246, 0.07);
   box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05);
 }
+
+/* ===== DECORATIVE VISUAL LANGUAGE ===== */
+
+/* 圆点网格纹理 */
+.dot-pattern {
+  background-image: radial-gradient(circle, rgba(139,92,246,0.18) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+/* 细圆点 (更稀疏) */
+.dot-pattern-sm {
+  background-image: radial-gradient(circle, rgba(139,92,246,0.12) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* 渐变文字 */
+.gradient-text-violet {
+  background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 55%, #E879F9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 贴纸基础样式 — 3D sticker pill */
+.hero-sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5);
+  position: absolute;
+  pointer-events: none;
+}
+
+/* 图标气泡 — squircle icon bubble */
+.icon-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 28% 32% 26% 30%;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
+  position: absolute;
+  pointer-events: none;
+  font-size: 22px;
+}
+
+/* 多种浮动动画变体 — 保持各自旋转角度 */
+@keyframes float-a {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-8px) rotate(-3deg); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translateY(0) rotate(2deg); }
+  50%       { transform: translateY(-10px) rotate(2deg); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%       { transform: translateY(-6px) rotate(-1deg); }
+}
+@keyframes float-d {
+  0%, 100% { transform: translateY(0) rotate(4deg); }
+  50%       { transform: translateY(-12px) rotate(4deg); }
+}
+@keyframes float-bubble {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-6px) scale(1.04); }
+}
+.float-a { animation: float-a 6s ease-in-out infinite; }
+.float-b { animation: float-b 8s ease-in-out infinite 1s; }
+.float-c { animation: float-c 7s ease-in-out infinite 2s; }
+.float-d { animation: float-d 9s ease-in-out infinite 0.5s; }
+.float-e { animation: float-b 7.5s ease-in-out infinite 1.5s; }
+.float-bubble-a { animation: float-bubble 5s ease-in-out infinite; }
+.float-bubble-b { animation: float-bubble 7s ease-in-out infinite 1.2s; }
+.float-bubble-c { animation: float-bubble 6s ease-in-out infinite 2.4s; }
+
+/* 特色卡片顶部色条 */
+.feature-card-strip {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  border-radius: 999px 999px 0 0;
+}
