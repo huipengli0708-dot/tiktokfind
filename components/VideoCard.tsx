@@ -32,11 +32,11 @@ export default function VideoCard({ video, variant = "default" }: VideoCardProps
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-900/60 via-purple-900/40 to-indigo-900/60 flex flex-col items-center justify-center gap-2">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center border border-violet-400/20">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-100 via-purple-50 to-amber-50 flex flex-col items-center justify-center gap-2">
+              <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
                 <div className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px] border-l-violet-400 ml-1" />
               </div>
-              <span className="text-[11px] text-white/40">暂无封面</span>
+              <span className="text-[11px] text-gray-400">暂无封面</span>
             </div>
           )}
           {/* 渐变遮罩 */}
@@ -91,26 +91,26 @@ export default function VideoCard({ video, variant = "default" }: VideoCardProps
 
           {/* 标题 */}
           <h3 className={cn(
-            "font-semibold text-gray-100 leading-snug mb-2 group-hover:text-violet-300 transition-colors line-clamp-2",
+            "font-semibold text-gray-800 leading-snug mb-2 group-hover:text-violet-600 transition-colors line-clamp-2",
             isFeatured ? "text-base" : "text-[13px] sm:text-[14px]"
           )}>
             {video.title}
           </h3>
 
           {/* 爆点结论 — 仅桌面显示 */}
-          <p className="hidden sm:block text-xs font-medium text-violet-300/90 bg-violet-900/25 border border-violet-700/30 rounded-lg px-3 py-1.5 leading-relaxed mb-3">
+          <p className="hidden sm:block text-xs font-medium text-violet-700/80 bg-violet-50/70 border border-violet-100/60 rounded-lg px-3 py-1.5 leading-relaxed mb-3">
             💡 {video.punchline}
           </p>
 
           {/* 底部行 */}
           <div className="flex items-center justify-between mt-1">
             <div className="hidden sm:flex items-center gap-1.5">
-              <span className="text-[11px] text-gray-500">利润率</span>
-              <span className="text-[11px] font-semibold text-emerald-400">
+              <span className="text-[11px] text-gray-400">利润率</span>
+              <span className="text-[11px] font-semibold text-emerald-600">
                 {video.analysis.profitMargin}
               </span>
             </div>
-            <span className="flex items-center gap-0.5 text-violet-400 text-[11px] sm:text-xs font-medium group-hover:gap-1.5 transition-all sm:ml-auto">
+            <span className="flex items-center gap-0.5 text-violet-500 text-[11px] sm:text-xs font-medium group-hover:gap-1.5 transition-all sm:ml-auto">
               查看 <ArrowRight size={10} />
             </span>
           </div>

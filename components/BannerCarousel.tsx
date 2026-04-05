@@ -43,7 +43,7 @@ export default function BannerCarousel({ videos }: { videos: VideoProduct[] }) {
 
   if (slides.length === 0) return (
     <div className="mx-4 mb-5 h-44 rounded-3xl app-banner-empty flex items-center justify-center">
-      <p className="text-white/30 text-sm">暂无精选内容</p>
+      <p className="text-gray-400 text-sm">暂无精选内容</p>
     </div>
   )
 
@@ -108,7 +108,7 @@ export default function BannerCarousel({ videos }: { videos: VideoProduct[] }) {
               key={i}
               onClick={() => goTo(i)}
               className={`h-1 rounded-full transition-all duration-300 ${
-                i === active ? "w-6 bg-violet-400" : "w-1.5 bg-white/25"
+                i === active ? "w-6 bg-violet-500" : "w-1.5 bg-white/40"
               }`}
             />
           ))}

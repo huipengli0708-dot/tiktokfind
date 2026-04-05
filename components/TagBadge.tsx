@@ -18,7 +18,7 @@ export default function TagBadge({ label, active = false, onClick, size = "sm" }
           "tag-pill cursor-pointer select-none transition-all duration-200",
           active && "tag-pill-active",
           size === "md" && "px-3 py-1 text-sm",
-          !active && "hover:bg-violet-500/20 hover:border-violet-500/40"
+          !active && "hover:bg-violet-50 hover:border-violet-200"
         )}
       >
         {label}

@@ -26,13 +26,13 @@ export default function BottomNav() {
               key={href}
               href={href}
               className={`flex flex-col items-center gap-1 px-5 py-1.5 rounded-xl transition-colors ${
-                active ? "text-violet-400" : "text-white/35"
+                active ? "text-violet-600" : "text-gray-400"
               }`}
             >
               <Icon
                 size={22}
                 strokeWidth={active ? 2.5 : 1.8}
-                className={active ? "drop-shadow-[0_0_8px_rgba(167,139,250,0.8)]" : ""}
+                className={active ? "drop-shadow-[0_2px_6px_rgba(139,92,246,0.40)]" : ""}
               />
               <span className="text-[10px] font-medium tracking-wide">{label}</span>
             </Link>

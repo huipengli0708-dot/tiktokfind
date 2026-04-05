@@ -16,12 +16,12 @@ export default function MobileHome({ featuredVideos, allVideos }: Props) {
       {/* Top header */}
       <header className="flex items-center justify-between px-5 pt-12 pb-4">
         <div className="flex items-center gap-2">
-          <span className="text-white font-bold text-xl tracking-tight">阿光选品</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
+          <span className="text-gray-900 font-bold text-xl tracking-tight">阿光选品</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-violet-500 animate-pulse" />
         </div>
         <Link
           href="/videos"
-          className="text-xs text-white/40 hover:text-white/65 transition-colors"
+          className="text-xs text-gray-400 hover:text-violet-600 transition-colors"
         >
           全部 {allVideos.length} 个爆款 →
         </Link>

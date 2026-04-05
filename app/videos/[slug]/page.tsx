@@ -53,15 +53,15 @@ export default async function VideoDetailPage({ params }: Props) {
 
   return (
     <div className="page-bg">
-      <div className="glow-orb w-96 h-96 bg-indigo-200/20 top-0 right-0 slow-pulse" />
-      <div className="glow-orb w-72 h-72 bg-purple-200/15 top-40 -left-20" />
+      <div className="glow-orb w-96 h-96 bg-violet-200/20 top-0 right-0 slow-pulse" />
+      <div className="glow-orb w-72 h-72 bg-amber-200/15 top-40 -left-20" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 py-8">
 
         {/* 返回按钮 */}
         <Link
           href="/videos"
-          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-indigo-600 transition-colors mb-6 group"
+          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-violet-600 transition-colors mb-6 group"
         >
           <ArrowLeft size={15} className="group-hover:-translate-x-0.5 transition-transform" />
           返回视频列表
@@ -98,7 +98,7 @@ export default async function VideoDetailPage({ params }: Props) {
             </div>
           ) : (
             /* TikTok / static cover — 9:16 with fallback placeholder */
-            <div className="relative aspect-[9/16] max-h-[65vh] overflow-hidden bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100">
+            <div className="relative aspect-[9/16] max-h-[65vh] overflow-hidden bg-gradient-to-br from-violet-100 via-purple-50 to-amber-50">
               {video.coverImage ? (
                 <>
                   <Image
@@ -114,7 +114,7 @@ export default async function VideoDetailPage({ params }: Props) {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="flex flex-col items-center gap-3 text-gray-400">
                     <div className="w-16 h-16 rounded-full bg-white/60 flex items-center justify-center">
-                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-indigo-400 ml-1" />
+                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-violet-400 ml-1" />
                     </div>
                     <span className="text-xs">暂无封面</span>
                   </div>
@@ -193,7 +193,7 @@ export default async function VideoDetailPage({ params }: Props) {
           </div>
           {/* punchline — one-line summary from AI analysis */}
           {video.punchline && (
-            <p className="text-sm font-medium text-indigo-700 bg-indigo-50/60 border border-indigo-100/60 rounded-xl px-4 py-2.5 mb-4 leading-relaxed">
+            <p className="text-sm font-medium text-violet-700 bg-violet-50/60 border border-violet-100/60 rounded-xl px-4 py-2.5 mb-4 leading-relaxed">
               {video.punchline}
             </p>
           )}
@@ -201,7 +201,7 @@ export default async function VideoDetailPage({ params }: Props) {
             <div className="space-y-3">
               {video.analysis.whyViral.map((point, i) => (
                 <div key={i} className="flex items-start gap-3 p-3 rounded-xl bg-white/50">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-500 to-purple-400 text-white text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
                     {i + 1}
                   </span>
                   <p className="text-sm text-gray-700 leading-relaxed">{point}</p>
@@ -288,11 +288,11 @@ export default async function VideoDetailPage({ params }: Props) {
             中: 'text-amber-600 bg-amber-50/80 border-amber-200/60',
             高: 'text-rose-600 bg-rose-50/80 border-rose-200/60',
           }[v.riskLevel]
-          const scoreColor = v.recommendation >= 90 ? 'from-indigo-500 to-purple-500' : v.recommendation >= 80 ? 'from-blue-500 to-indigo-500' : 'from-gray-400 to-gray-500'
+          const scoreColor = v.recommendation >= 90 ? 'from-violet-500 to-purple-400' : v.recommendation >= 80 ? 'from-violet-400 to-indigo-400' : 'from-gray-400 to-gray-500'
           return (
-            <div className="glass-card rounded-3xl p-5 md:p-7 mb-5 border border-indigo-100/40">
+            <div className="glass-card rounded-3xl p-5 md:p-7 mb-5 border border-violet-100/40">
               <div className="flex items-center gap-2.5 mb-5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-purple-400 flex items-center justify-center shrink-0">
                   <Star size={15} className="text-white fill-white" />
                 </div>
                 <h2 className="text-base font-bold text-gray-900">阿光综合结论</h2>
@@ -319,7 +319,7 @@ export default async function VideoDetailPage({ params }: Props) {
               {/* 适合人群 + 内容打法 + 风险等级 */}
               <div className="space-y-3">
                 <div className="flex items-start gap-3 p-3.5 rounded-xl bg-white/50 border border-white/70">
-                  <Users size={14} className="text-indigo-500 mt-0.5 shrink-0" />
+                  <Users size={14} className="text-violet-500 mt-0.5 shrink-0" />
                   <div>
                     <div className="text-[11px] font-semibold text-gray-400 mb-0.5 uppercase tracking-wide">适合人群</div>
                     <p className="text-sm text-gray-700 leading-relaxed">{v.targetSeller}</p>
@@ -381,7 +381,7 @@ export default async function VideoDetailPage({ params }: Props) {
           <section>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-bold text-gray-900">相关爆款推荐</h2>
-              <Link href="/videos" className="flex items-center gap-1 text-xs text-indigo-600 font-medium">
+              <Link href="/videos" className="flex items-center gap-1 text-xs text-violet-600 font-medium">
                 查看全部 <ArrowRight size={12} />
               </Link>
             </div>

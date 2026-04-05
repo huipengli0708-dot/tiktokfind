@@ -24,7 +24,7 @@ export default function DesktopNavbar() {
         <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
           <TrendingUp size={14} className="text-white" />
         </div>
-        <span className="text-white font-bold text-sm">阿光选品</span>
+        <span className="text-gray-900 font-bold text-sm">阿光选品</span>
       </Link>
 
       {/* Primary nav */}
@@ -37,8 +37,8 @@ export default function DesktopNavbar() {
               href={href}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 active
-                  ? "text-violet-300 bg-violet-500/15"
-                  : "text-white/55 hover:text-white/85 hover:bg-white/[0.06]"
+                  ? "text-violet-700 bg-violet-50"
+                  : "text-gray-500 hover:text-gray-800 hover:bg-gray-50/80"
               }`}
             >
               {label}
@@ -50,7 +50,7 @@ export default function DesktopNavbar() {
       {/* Low-priority admin entry — intentionally muted */}
       <Link
         href="/admin/login"
-        className="text-xs text-white/20 hover:text-white/45 transition-colors px-2 py-1.5 shrink-0"
+        className="text-xs text-gray-300 hover:text-gray-500 transition-colors px-2 py-1.5 shrink-0"
       >
         管理
       </Link>

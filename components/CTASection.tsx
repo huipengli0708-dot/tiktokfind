@@ -23,8 +23,8 @@ export default function CTASection({
   if (variant === "compact") {
     return (
       <div className="glass-card rounded-2xl p-6 text-center relative overflow-hidden">
-        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-indigo-400/10 blur-2xl" />
-        <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-purple-400/10 blur-2xl" />
+        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-violet-300/15 blur-2xl" />
+        <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-amber-300/12 blur-2xl" />
         <div className="relative z-10">
           <p className="text-sm font-semibold text-gray-700 mb-3">{subtitle}</p>
           <Link href={primaryHref} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold btn-gradient">
@@ -38,15 +38,15 @@ export default function CTASection({
   return (
     <section className="relative rounded-3xl overflow-hidden">
       {/* 背景渐变 */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/8 to-pink-500/6" />
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-400/8 via-purple-400/6 to-amber-400/5" />
       <div className="absolute inset-0 glass-card" />
 
       {/* 装饰球 */}
-      <div className="glow-orb w-64 h-64 bg-indigo-400/20 -top-16 -right-16 slow-pulse" />
-      <div className="glow-orb w-48 h-48 bg-purple-400/20 -bottom-12 -left-12 slow-pulse" style={{ animationDelay: "2s" }} />
+      <div className="glow-orb w-64 h-64 bg-violet-300/18 -top-16 -right-16 slow-pulse" />
+      <div className="glow-orb w-48 h-48 bg-amber-300/15 -bottom-12 -left-12 slow-pulse" style={{ animationDelay: "2s" }} />
 
       <div className="relative z-10 px-6 py-12 md:py-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-100/80 border border-indigo-200/60 text-indigo-700 text-xs font-medium mb-5">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-700 text-xs font-medium mb-5">
           <Sparkles size={12} />
           专为 TikTok 卖家设计
         </div>

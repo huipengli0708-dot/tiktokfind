@@ -8,10 +8,10 @@ export default function FeedCard({ video }: { video: VideoProduct }) {
   const competition = video.analysis.competitionLevel
 
   const competitionColor = {
-    低: "text-emerald-400",
-    中: "text-amber-400",
-    高: "text-rose-400",
-  }[competition] ?? "text-white/40"
+    低: "text-emerald-600",
+    中: "text-amber-600",
+    高: "text-rose-500",
+  }[competition] ?? "text-gray-400"
 
   return (
     <Link
@@ -30,13 +30,13 @@ export default function FeedCard({ video }: { video: VideoProduct }) {
 
       {/* Text */}
       <div className="flex-1 min-w-0">
-        <p className="text-white text-sm font-semibold line-clamp-1 mb-1">
+        <p className="text-gray-800 text-sm font-semibold line-clamp-1 mb-1">
           {video.title}
         </p>
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-white/45 text-[11px]">{video.category}</span>
+          <span className="text-gray-400 text-[11px]">{video.category}</span>
           {video.content_type && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/20">
+            <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-violet-100 text-violet-600 border border-violet-200/60">
               {video.content_type}
             </span>
           )}
@@ -57,7 +57,7 @@ export default function FeedCard({ video }: { video: VideoProduct }) {
             {video.analysis.profitMargin.split("，")[0]}
           </span>
         </div>
-        <ChevronRight size={14} className="text-white/25" />
+        <ChevronRight size={14} className="text-gray-300" />
       </div>
     </Link>
   )

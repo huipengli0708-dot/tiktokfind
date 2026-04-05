@@ -129,51 +129,52 @@
   }
 }
 
-/* ===== 全站视觉风格 ===== */
+/* ===== 全站视觉风格 — Soft Dreamy Theme ===== */
 
-/* 页面背景 — 深色渐变 */
+/* 页面背景 — 柔和薰衣草渐变 */
 .page-bg {
-  background: linear-gradient(135deg, #0D0B1E 0%, #13102A 35%, #0F1624 65%, #12102C 100%);
+  background: linear-gradient(145deg, #F8F7FC 0%, #F2EEFF 40%, #FBF8FF 70%, #FFF7F0 100%);
   min-height: 100vh;
   position: relative;
 }
 
-/* 暗色毛玻璃卡片 */
+/* 白色毛玻璃卡片 */
 .glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 92, 246, 0.08);
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .glass-card-hover {
   transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.22), 0 4px 16px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(124, 58, 237, 0.18);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.13), 0 4px 12px rgba(0, 0, 0, 0.05);
   transform: translateY(-3px);
-  border-color: rgba(124, 58, 237, 0.28);
+  border-color: rgba(139, 92, 246, 0.16);
 }
 
-/* 深色导航玻璃 */
+/* 轻量玻璃导航 */
 .glass-nav {
-  background: rgba(13, 11, 30, 0.88);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.09);
+  box-shadow: 0 2px 16px rgba(139, 92, 246, 0.06);
 }
 
-/* 渐变主按钮 — 霓虹辉光 */
+/* 主按钮 — 柔和紫色渐变 */
 .btn-gradient {
-  background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 60%, #A855F7 100%);
+  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 60%, #C4B5FD 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.50), 0 0 20px rgba(124, 58, 237, 0.18);
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-gradient:hover {
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.70), 0 0 0 4px rgba(124, 58, 237, 0.15), 0 0 40px rgba(124, 58, 237, 0.22);
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.45), 0 0 0 4px rgba(139, 92, 246, 0.10);
   transform: translateY(-1px) scale(1.02);
 }
 .btn-gradient:active {
@@ -182,16 +183,16 @@
 
 /* 描边次按钮 */
 .btn-outline-glass {
-  background: rgba(124, 58, 237, 0.08);
+  background: rgba(255, 255, 255, 0.70);
   backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(124, 58, 237, 0.35);
-  color: #C4B5FD;
+  border: 1.5px solid rgba(139, 92, 246, 0.25);
+  color: #7C3AED;
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .btn-outline-glass:hover {
-  background: rgba(124, 58, 237, 0.15);
-  border-color: rgba(124, 58, 237, 0.55);
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.22), 0 0 0 3px rgba(124, 58, 237, 0.08);
+  background: rgba(139, 92, 246, 0.06);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
   transform: translateY(-1px) scale(1.01);
 }
 
@@ -204,48 +205,46 @@
   z-index: 0;
 }
 
-/* 全站背景模糊光斑层 — 霓虹辉光 */
+/* 全站背景模糊光斑层 — 柔和梦幻 */
 .page-bg::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(124,58,237,0.22) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 85% 10%, rgba(163,230,53,0.06) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 60% at 50% 80%, rgba(124,58,237,0.14) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 35% at 80% 60%, rgba(59,130,246,0.08) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(139,92,246,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 10%, rgba(250,204,21,0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 50% 85%, rgba(167,139,250,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 55% 35% at 80% 55%, rgba(251,146,60,0.04) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
 
 /* 趋势评分条 */
 .trend-bar-track {
-  background: rgba(124, 58, 237, 0.15);
+  background: rgba(139, 92, 246, 0.10);
   border-radius: 999px;
   height: 6px;
   overflow: hidden;
 }
 .trend-bar-fill {
-  background: linear-gradient(90deg, #7C3AED, #A855F7);
+  background: linear-gradient(90deg, #8B5CF6, #A78BFA);
   border-radius: 999px;
   height: 100%;
   transition: width 0.8s ease;
-  box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
 }
 
-/* 霓虹评分角标 */
+/* 评分角标 — 柔和紫 */
 .neon-score-badge {
-  background: linear-gradient(135deg, rgba(124,58,237,0.85) 0%, rgba(139,92,246,0.85) 100%);
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.55), 0 0 20px rgba(124, 58, 237, 0.18);
+  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.35);
   backdrop-filter: blur(8px);
 }
 
-/* 霓虹绿 ROI 角标 */
+/* ROI 角标 — 温暖黄/橙 */
 .neon-roi-badge {
-  background: rgba(163, 230, 53, 0.12);
-  border: 1px solid rgba(163, 230, 53, 0.30);
-  color: #A3E635;
-  box-shadow: 0 0 8px rgba(163, 230, 53, 0.20);
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  color: #B45309;
   backdrop-filter: blur(8px);
 }
 
@@ -258,26 +257,26 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  background: rgba(124, 58, 237, 0.12);
-  color: #C4B5FD;
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: rgba(139, 92, 246, 0.08);
+  color: #7C3AED;
+  border: 1px solid rgba(139, 92, 246, 0.15);
   white-space: nowrap;
   backdrop-filter: blur(4px);
   transition: all 0.2s ease;
 }
 .tag-pill:hover {
-  background: rgba(124, 58, 237, 0.20);
-  border-color: rgba(124, 58, 237, 0.40);
+  background: rgba(139, 92, 246, 0.13);
+  border-color: rgba(139, 92, 246, 0.28);
 }
 
 .tag-pill-active {
-  background: linear-gradient(135deg, #7C3AED, #8B5CF6);
+  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
   color: white;
   border-color: transparent;
-  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.50);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.32);
 }
 
-/* 新手友好标签 */
+/* 新手友好标签 — 温暖黄 */
 .tag-pill-beginner {
   display: inline-flex;
   align-items: center;
@@ -286,9 +285,9 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.01em;
-  background: rgba(163, 230, 53, 0.10);
-  color: #A3E635;
-  border: 1px solid rgba(163, 230, 53, 0.25);
+  background: rgba(250, 204, 21, 0.12);
+  color: #B45309;
+  border: 1px solid rgba(250, 204, 21, 0.30);
   white-space: nowrap;
   backdrop-filter: blur(4px);
 }
@@ -299,94 +298,98 @@
   50% { transform: translateY(-8px); }
 }
 @keyframes slow-pulse {
-  0%, 100% { opacity: 0.25; }
-  50% { opacity: 0.45; }
+  0%, 100% { opacity: 0.20; }
+  50% { opacity: 0.40; }
 }
 .float-anim { animation: float-y 7s ease-in-out infinite; }
 .slow-pulse { animation: slow-pulse 5s ease-in-out infinite; }
 
 /* 滚动条 */
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(124, 58, 237, 0.30);
+  background: rgba(139, 92, 246, 0.18);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(124, 58, 237, 0.50);
+  background: rgba(139, 92, 246, 0.32);
 }
 
-/* ===== DARK APP THEME ===== */
+/* ===== HOME / FEED THEME ===== */
 
-/* Main dark background */
+/* 首页背景 — 柔和薰衣草 */
 .app-bg {
-  background: linear-gradient(160deg, #0E0C1F 0%, #100E26 45%, #0D1520 100%);
+  background: linear-gradient(160deg, #F0EEFF 0%, #F8F6FF 50%, #FFF6EE 100%);
   min-height: 100vh;
   position: relative;
 }
 
-/* Empty banner placeholder */
+/* Banner 占位 */
 .app-banner-empty {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.10);
 }
 
-/* Feed item card */
+/* Feed 列表卡片 */
 .app-feed-card {
-  background: rgba(255, 255, 255, 0.055);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(139, 92, 246, 0.07);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Feature card – purple */
+/* Feature card – 柔和紫 */
 .app-card-purple {
-  background: linear-gradient(135deg, rgba(109, 40, 217, 0.75) 0%, rgba(67, 20, 158, 0.9) 100%);
-  border: 1px solid rgba(139, 92, 246, 0.25);
-  box-shadow: 0 4px 20px rgba(109, 40, 217, 0.2);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.10) 0%, rgba(167, 139, 250, 0.07) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.14);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.07);
 }
 
-/* Feature card – teal */
+/* Feature card – 柔和绿 */
 .app-card-teal {
-  background: linear-gradient(135deg, rgba(6, 95, 70, 0.8) 0%, rgba(4, 55, 55, 0.9) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  box-shadow: 0 4px 20px rgba(6, 95, 70, 0.25);
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.09) 0%, rgba(5, 150, 105, 0.06) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.14);
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.07);
 }
 
-/* Feature card – neutral dark */
+/* Feature card – 中性浅色 */
 .app-card-dark {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.60);
+  border: 1px solid rgba(139, 92, 246, 0.07);
 }
 
-/* Bottom navigation bar */
+/* 底部导航栏 */
 .app-bottom-nav {
-  background: rgba(10, 8, 24, 0.96);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(139, 92, 246, 0.08);
+  box-shadow: 0 -4px 20px rgba(139, 92, 246, 0.06);
 }
 
 /* ===== DESKTOP THEME ===== */
 
-/* Desktop top navigation bar */
+/* 桌面顶部导航 */
 .app-desktop-nav {
-  background: rgba(10, 8, 22, 0.90);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.08);
+  box-shadow: 0 2px 16px rgba(139, 92, 246, 0.06);
 }
 
 /* Desktop sidebar */
 .app-sidebar {
-  background: rgba(9, 7, 22, 0.97);
-  border-right: 1px solid rgba(255, 255, 255, 0.065);
+  background: rgba(255, 255, 255, 0.95);
+  border-right: 1px solid rgba(139, 92, 246, 0.08);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
 
-/* Desktop main content card (table container) */
+/* Desktop main content card */
 .app-desktop-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(139, 92, 246, 0.07);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05);
 }

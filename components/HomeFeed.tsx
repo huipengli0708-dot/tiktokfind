@@ -22,15 +22,15 @@ export default function HomeFeed({ videos }: { videos: VideoProduct[] }) {
       {/* Section header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <h2 className="text-white font-bold text-base">爆款选品库</h2>
-          <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/20">
-            <span className="w-1 h-1 rounded-full bg-rose-400 animate-pulse inline-block" />
+          <h2 className="text-gray-900 font-bold text-base">爆款选品库</h2>
+          <span className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 border border-amber-200/60">
+            <span className="w-1 h-1 rounded-full bg-amber-500 animate-pulse inline-block" />
             实时更新
           </span>
         </div>
         <Link
           href="/videos"
-          className="flex items-center gap-0.5 text-xs text-white/40 hover:text-violet-400 transition-colors"
+          className="flex items-center gap-0.5 text-xs text-gray-400 hover:text-violet-600 transition-colors"
         >
           查看全部 <ArrowRight size={12} />
         </Link>
@@ -47,8 +47,8 @@ export default function HomeFeed({ videos }: { videos: VideoProduct[] }) {
             onClick={() => setTab(t)}
             className={`shrink-0 px-4 py-1.5 rounded-full text-[11px] font-semibold transition-all ${
               t === tab
-                ? "bg-white text-black shadow-[0_0_12px_rgba(255,255,255,0.2)]"
-                : "bg-white/[0.07] text-white/55 border border-white/10"
+                ? "bg-violet-600 text-white shadow-[0_4px_12px_rgba(139,92,246,0.30)]"
+                : "bg-white/70 text-gray-500 border border-violet-100/40 hover:text-gray-800"
             }`}
           >
             {t}
@@ -63,7 +63,7 @@ export default function HomeFeed({ videos }: { videos: VideoProduct[] }) {
         ))}
 
         {filtered.length === 0 && (
-          <p className="text-center text-white/25 text-sm py-12">
+          <p className="text-center text-gray-400 text-sm py-12">
             该分类暂无内容
           </p>
         )}
@@ -71,7 +71,7 @@ export default function HomeFeed({ videos }: { videos: VideoProduct[] }) {
         {filtered.length > 10 && (
           <Link
             href="/videos"
-            className="flex items-center justify-center gap-2 py-3 rounded-2xl app-feed-card text-white/50 text-sm mt-2"
+            className="flex items-center justify-center gap-2 py-3 rounded-2xl app-feed-card text-gray-500 text-sm mt-2"
           >
             查看更多 <ArrowRight size={14} />
           </Link>

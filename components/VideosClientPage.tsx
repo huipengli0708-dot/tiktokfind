@@ -59,11 +59,11 @@ export default function VideosClientPage({ videos }: Props) {
 
         <section className="pt-10 pb-8 text-center md:text-left">
           <div className="flex items-center gap-2 justify-center md:justify-start mb-2">
-            <TrendingUp size={16} className="text-violet-400" />
-            <span className="text-xs font-medium text-violet-400 uppercase tracking-wider">每周持续更新</span>
+            <TrendingUp size={16} className="text-violet-500" />
+            <span className="text-xs font-medium text-violet-500 uppercase tracking-wider">每周持续更新</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-100 mb-2">爆款视频库</h1>
-          <p className="text-gray-400 text-sm max-w-md mx-auto md:mx-0">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">爆款视频库</h1>
+          <p className="text-gray-500 text-sm max-w-md mx-auto md:mx-0">
             每个视频都经过系统化分析，告诉你为什么它会爆，以及如何复制这个逻辑。
           </p>
         </section>
@@ -77,7 +77,7 @@ export default function VideosClientPage({ videos }: Props) {
                 placeholder="搜索商品名称、标签..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm bg-white/5 border border-white/10 placeholder:text-gray-500 text-gray-200 outline-none focus:ring-2 focus:ring-violet-500/30 focus:border-violet-500/30 transition-all backdrop-blur-sm"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm bg-white/80 border border-violet-100/60 placeholder:text-gray-400 text-gray-700 outline-none focus:ring-2 focus:ring-violet-200/60 focus:border-violet-300/50 transition-all backdrop-blur-sm"
               />
             </div>
 
@@ -90,12 +90,12 @@ export default function VideosClientPage({ videos }: Props) {
               />
               <button
                 onClick={() => setShowTagFilter(!showTagFilter)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm glass-card border border-white/10 text-gray-300 hover:text-white transition-all"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-full text-sm glass-card border border-violet-100/40 text-gray-600 hover:text-gray-900 transition-all"
               >
                 <SlidersHorizontal size={13} />
                 标签
                 {selectedTags.length > 0 && (
-                  <span className="w-4 h-4 rounded-full bg-violet-500 text-white text-[10px] font-bold flex items-center justify-center" style={{boxShadow:'0 0 6px rgba(124,58,237,0.7)'}}>
+                  <span className="w-4 h-4 rounded-full bg-violet-500 text-white text-[10px] font-bold flex items-center justify-center">
                     {selectedTags.length}
                   </span>
                 )}
@@ -103,8 +103,8 @@ export default function VideosClientPage({ videos }: Props) {
             </div>
 
             {showTagFilter && (
-              <div className="border-t border-white/10 pt-3">
-                <p className="text-xs text-gray-500 mb-2 font-medium">按标签筛选</p>
+              <div className="border-t border-violet-100/40 pt-3">
+                <p className="text-xs text-gray-400 mb-2 font-medium">按标签筛选</p>
                 <div className="flex flex-wrap gap-2">
                   {allTags.map((tag) => (
                     <TagBadge
@@ -118,7 +118,7 @@ export default function VideosClientPage({ videos }: Props) {
                 {selectedTags.length > 0 && (
                   <button
                     onClick={() => setSelectedTags([])}
-                    className="mt-2 text-xs text-violet-400 hover:underline"
+                    className="mt-2 text-xs text-violet-600 hover:underline"
                   >
                     清除筛选
                   </button>
@@ -129,8 +129,8 @@ export default function VideosClientPage({ videos }: Props) {
         </section>
 
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm text-gray-400">
-            共找到 <span className="font-semibold text-gray-100">{filteredVideos.length}</span> 个爆款案例
+          <p className="text-sm text-gray-500">
+            共找到 <span className="font-semibold text-gray-800">{filteredVideos.length}</span> 个爆款案例
           </p>
           {(selectedTags.length > 0 || searchQuery || selectedTypeLabel !== "全部") && (
             <button
@@ -139,7 +139,7 @@ export default function VideosClientPage({ videos }: Props) {
                 setSelectedTags([])
                 setSearchQuery("")
               }}
-              className="text-xs text-violet-400 hover:underline"
+              className="text-xs text-violet-600 hover:underline"
             >
               重置筛选
             </button>
@@ -156,8 +156,8 @@ export default function VideosClientPage({ videos }: Props) {
           ) : (
             <div className="glass-card rounded-2xl py-16 text-center">
               <div className="text-4xl mb-3">🔍</div>
-              <p className="text-gray-400 text-sm">没有找到匹配的爆款案例</p>
-              <p className="text-gray-500 text-xs mt-1">试试调整筛选条件</p>
+              <p className="text-gray-500 text-sm">没有找到匹配的爆款案例</p>
+              <p className="text-gray-400 text-xs mt-1">试试调整筛选条件</p>
             </div>
           )}
         </section>
