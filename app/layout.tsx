@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import BottomNav from "@/components/BottomNav";
+import MobileFloatingTab from "@/components/MobileFloatingTab";
 import DesktopNavbar from "@/components/desktop/DesktopNavbar";
 
 const geistSans = Geist({
@@ -40,8 +40,8 @@ export default function RootLayout({
           {children}
         </main>
 
-        {/* Mobile bottom nav — md:hidden applied internally */}
-        <BottomNav />
+        {/* Mobile floating tab — md:hidden applied internally */}
+        <MobileFloatingTab />
       </body>
     </html>
   );
