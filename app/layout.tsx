@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import PostHogProvider from "@/components/PostHogProvider";
 import MobileFloatingTab from "@/components/MobileFloatingTab";
 import DesktopNavbar from "@/components/desktop/DesktopNavbar";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className={`${geistSans.variable} antialiased`}>
       <body className="min-h-screen">
+        <PostHogProvider />
         {/* Desktop top nav — hidden on mobile, hidden on /admin (handled internally) */}
         <DesktopNavbar />
 

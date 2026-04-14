@@ -64,7 +64,7 @@ export default function VideosClientPage({ videos }: Props) {
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">爆款视频库</h1>
           <p className="text-gray-500 text-sm max-w-md mx-auto md:mx-0">
-            每个视频都经过系统化分析，告诉你为什么它会爆，以及如何复制这个逻辑。
+            看爆款，做爆款，成爆款
           </p>
         </section>
 

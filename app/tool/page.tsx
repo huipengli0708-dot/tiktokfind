@@ -105,8 +105,9 @@ export default function ToolPage() {
             </span>
           </h1>
           <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed mb-8">
-            阿光选品工具帮你建立可复用的选品体系，
-            从趋势监测到内容打法，完整链条覆盖，大幅缩短从 0 到爆款的时间。
+            阿光选品工具帮你建立可复用的选品体系<br />
+            0延迟抓取平台数据，24小时监测同行<br />
+            第一时间发现爆品，永远快人一步
           </p>
 
           {/* 社会证明 */}

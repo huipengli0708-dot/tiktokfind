@@ -9,36 +9,36 @@ export const metadata: Metadata = {
 
 const socialLinks = [
   {
-    platform: "TikTok",
-    handle: "@aguang_picks",
-    desc: "主要发布爆款选品案例视频",
+    platform: "抖音",
+    handle: "阿光聊选品",
+    desc: "TikTok美区选品实战分享",
     icon: "📱",
     color: "from-gray-800 to-gray-900",
     available: false,
   },
   {
     platform: "小红书",
-    handle: "@阿光选品",
+    handle: "阿光聊选品",
     desc: "图文版选品分析与心得",
     icon: "📔",
     color: "from-rose-500 to-pink-600",
     available: false,
   },
   {
-    platform: "YouTube",
-    handle: "@aguang_picks",
-    desc: "长视频深度拆解爆款逻辑",
+    platform: "视频号",
+    handle: "阿光聊选品",
+    desc: "深度拆解爆款逻辑",
     icon: "🎬",
-    color: "from-red-500 to-red-600",
+    color: "from-emerald-500 to-teal-600",
     available: false,
   },
 ]
 
 const myStory = [
-  "从 2022 年开始研究 TikTok 选品，踩过太多跟风选品、感觉选品的坑",
-  "总结出一套可量化、可复用的爆款评估框架，帮助自己和身边朋友提升选品成功率",
-  "开始在社媒分享选品研究，发现有大量同样在摸索的卖家和创作者",
-  "把方法论系统化整理成工具，目标是让更多人可以用科学的方式做选品",
+  "第一阶段：2023年8月入局TikTok美区，从0开始做店铺渠道号（双开号），第一个月单日做到5000美金，12个号累计做到30万美金GMV",
+  "第二阶段：开始做保健品截流，虽然因封店失败，但积累了大量选品和跟品经验",
+  "第三阶段：转向自有品牌，孵化两个千万GMV级保健品品牌，通过混剪素材+Ads投放，多次进入单日销量榜Top10",
+  "第四阶段：开始做产品实拍，组建团队，打磨产品与内容，专注做长期可复制的爆款模型",
 ]
 
 const contactMethods = [
@@ -89,16 +89,17 @@ export default function ContactPage() {
               <div className="flex-1 text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-100/80 border border-indigo-200/60 text-indigo-700 text-xs font-medium mb-3">
                   <Sparkles size={11} />
-                  TikTok 爆款研究者
+                  美区TikTok千万级卖家
                 </div>
                 <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">嗨，我是阿光 👋</h1>
                 <p className="text-gray-500 text-sm leading-relaxed mb-4">
-                  专注 TikTok 爆款商品研究，用数据和方法论帮助卖家和创作者更精准地找到高利润机会。
-                  我相信好的选品不靠运气，靠的是正确的框架和持续的市场感知。
+                  这个网站是我对TikTok美区的实战总结。
                 </p>
                 <p className="text-gray-500 text-sm leading-relaxed">
-                  这个网站是我研究成果的公开展示窗口，每个分析案例都是我真实花时间做的研究，
-                  不是从网上搬运或随便写的。如果你觉得有用，欢迎关注我的社媒账号，或者直接来聊聊。
+                  如果你是刚入局的小白，或者国内商家想了解海外市场，
+                  这里能帮你用最短时间看懂：
+                  什么产品在卖，为什么能卖，怎么去做。<br /><br />
+                  不用踩坑，直接看结果。
                 </p>
               </div>
             </div>
@@ -107,7 +108,7 @@ export default function ContactPage() {
 
         {/* ===== 我的故事 ===== */}
         <section className="py-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">我是怎么走到这一步的</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">我的经历</h2>
           <div className="space-y-3">
             {myStory.map((story, i) => (
               <div key={i} className="flex items-start gap-3 glass-card rounded-xl p-4">

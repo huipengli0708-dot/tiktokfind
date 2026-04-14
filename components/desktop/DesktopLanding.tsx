@@ -58,12 +58,11 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
                 TikTok 爆款
               </span>
               <br />
-              <span className="text-gray-400 font-normal text-4xl">附完整分析与内容打法</span>
+              <span className="text-gray-400 font-normal text-4xl">做正确的事，把事情做正确</span>
             </h1>
 
             <p className="text-gray-500 text-base leading-relaxed mb-9 max-w-lg">
-              深入拆解每个爆款背后的市场逻辑、内容策略和利润空间。
-              看懂一个商品，建立你自己的选品判断力。
+              看一千条爆款视频，比拍一千条视频更重要
             </p>
 
             <div className="flex items-center gap-3 mb-10">
@@ -79,8 +78,8 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
             <div className="flex items-center gap-3">
               {[
                 { value: `${totalVideos}+`, label: "爆款案例", valColor: "text-violet-600", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.15)" },
-                { value: String(avgScore), label: "平均爆款指数", valColor: "text-amber-600", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.18)" },
-                { value: `${categories}+`, label: "覆盖品类", valColor: "text-emerald-600", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.15)" },
+                { value: String(avgScore), label: "本周上新视频数", valColor: "text-amber-600", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.18)" },
+                { value: `${categories}+`, label: "今日访客数", valColor: "text-emerald-600", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.15)" },
               ].map(({ value, label, valColor, bg, border }) => (
                 <div key={label} className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl" style={{ background: bg, border: `1px solid ${border}` }}>
                   <span className={`text-xl font-bold tabular-nums ${valColor}`}>{value}</span>
@@ -421,7 +420,7 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
         <section className="px-8 pb-24 max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-gray-900 text-xl font-bold">本期精选爆款</h2>
+              <h2 className="text-gray-900 text-xl font-bold">看爆款，做爆款，成爆款</h2>
               <p className="text-gray-400 text-sm mt-0.5">点击任意商品查看完整分析</p>
             </div>
             <Link href="/videos" className="flex items-center gap-1.5 text-sm text-violet-600 hover:text-violet-700 transition-colors font-medium">
