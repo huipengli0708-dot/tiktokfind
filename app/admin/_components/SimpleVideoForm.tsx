@@ -5,7 +5,11 @@ import { insertVideoAction } from "@/app/admin/actions"
 import Mp4UploadField from "./Mp4UploadField"
 
 const VIDEO_SOURCE_TYPES = ["tiktok", "mp4"] as const
-const CONTENT_TYPES = ["商家实拍", "达人", "AI"] as const
+const CONTENT_TYPES = [
+  { value: "merchant", label: "商家实拍" },
+  { value: "creator",  label: "达人" },
+  { value: "ai",       label: "AI" },
+] as const
 
 function deriveSlug(title: string, seed: number): string {
   const ascii = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
@@ -109,7 +113,7 @@ export default function SimpleVideoForm() {
           <div>
             <label className={labelCls}>内容类型 *</label>
             <select name="content_type" className={selectCls}>
-              {CONTENT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
+              {CONTENT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
             </select>
           </div>
         </div>

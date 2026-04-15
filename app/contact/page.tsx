@@ -52,7 +52,7 @@ const contactMethods = [
   {
     title: "邮件联系",
     desc: "适合详细咨询和合作沟通",
-    value: "aguang.picks@example.com（示例）",
+    value: "请通过微信联系，邮件渠道即将开放",
     icon: <Mail size={18} className="text-blue-500" />,
     bgClass: "bg-blue-50/60 border-blue-100/60",
   },

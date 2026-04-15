@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-export function proxy(request: NextRequest) {
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // 只保护 /admin，但放行登录页本身
+  // Protect all /admin routes except the login page itself
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const cookie = request.cookies.get('admin_auth')
     if (cookie?.value !== '1') {

@@ -78,8 +78,8 @@ export default function DesktopLanding({ featuredVideos, allVideos }: Props) {
             <div className="flex items-center gap-3">
               {[
                 { value: `${totalVideos}+`, label: "爆款案例", valColor: "text-violet-600", bg: "rgba(139,92,246,0.08)", border: "rgba(139,92,246,0.15)" },
-                { value: String(avgScore), label: "本周上新视频数", valColor: "text-amber-600", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.18)" },
-                { value: `${categories}+`, label: "今日访客数", valColor: "text-emerald-600", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.15)" },
+                { value: String(avgScore), label: "平均爆款指数", valColor: "text-amber-600", bg: "rgba(245,158,11,0.08)", border: "rgba(245,158,11,0.18)" },
+                { value: `${categories}+`, label: "覆盖品类数", valColor: "text-emerald-600", bg: "rgba(16,185,129,0.08)", border: "rgba(16,185,129,0.15)" },
               ].map(({ value, label, valColor, bg, border }) => (
                 <div key={label} className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl" style={{ background: bg, border: `1px solid ${border}` }}>
                   <span className={`text-xl font-bold tabular-nums ${valColor}`}>{value}</span>

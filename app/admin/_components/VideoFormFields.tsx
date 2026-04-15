@@ -40,7 +40,6 @@ interface Props {
 }
 
 const VIDEO_SOURCE_TYPES = ["tiktok", "mp4"] as const
-const CONTENT_TYPES = ["商家实拍", "达人", "AI"] as const
 const COMPETITION_LEVELS = ["低", "中", "高"] as const
 const RISK_LEVELS = ["低", "中", "高"] as const
 
@@ -68,8 +67,14 @@ export default function VideoFormFields({ defaults = {} }: Props) {
         <TwoCol>
           <Field label="分类 *" name="category" required defaultValue={d.category}
             placeholder="厨房好物 / 数码配件 / 家居生活" />
-          <SelectField label="内容类型 *" name="content_type"
-            options={CONTENT_TYPES} defaultValue={d.content_type ?? "商家实拍"} />
+          <div>
+            <label className="block text-xs font-semibold text-gray-600 mb-1.5">内容类型 *</label>
+            <select name="content_type" defaultValue={d.content_type ?? "merchant"} className={selectCls}>
+              <option value="merchant">商家实拍</option>
+              <option value="creator">达人</option>
+              <option value="ai">AI</option>
+            </select>
+          </div>
         </TwoCol>
         <Field label="标签（逗号分隔）" name="tags"
           defaultValue={d.tags?.join(", ") ?? ""}
