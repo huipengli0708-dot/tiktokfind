@@ -3,7 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-function TikTokCallbackContent() {
+function TikTokAccountCallbackContent() {
   const params = useSearchParams();
   const [copied, setCopied] = useState(false);
 
@@ -15,8 +15,8 @@ function TikTokCallbackContent() {
     if (authCode) {
       return {
         icon: "OK",
-        title: "TikTok 广告主授权成功",
-        message: "请复制下面的完整回调链接，粘贴回本地工具继续连接。",
+        title: "TikTok 账号授权成功",
+        message: "请复制下面的完整回调链接，粘贴回本地工具继续连接账号数据。",
         color: "#16a34a",
       };
     }
@@ -24,7 +24,7 @@ function TikTokCallbackContent() {
     return {
       icon: "!",
       title: "没有收到授权码",
-      message: "TikTok 没有返回 auth_code 或 code，请从本地工具重新打开授权链接。",
+      message: "TikTok 没有返回 auth_code 或 code，请从本地工具重新打开账号授权链接。",
       color: "#ef4444",
     };
   }, [authCode]);
@@ -82,17 +82,17 @@ function TikTokCallbackContent() {
         </button>
 
         <p className="mt-4 text-center text-xs leading-5 text-slate-500">
-          这个页面只用于接收 TikTok 授权跳转，不会公开显示你的密钥。
+          这个页面只用于接收 TikTok 账号授权跳转，不会公开显示你的密钥。
         </p>
       </div>
     </div>
   );
 }
 
-export default function TikTokCallbackPage() {
+export default function TikTokAccountCallbackPage() {
   return (
     <Suspense fallback={<div className="p-8 text-center">正在读取授权结果...</div>}>
-      <TikTokCallbackContent />
+      <TikTokAccountCallbackContent />
     </Suspense>
   );
 }
