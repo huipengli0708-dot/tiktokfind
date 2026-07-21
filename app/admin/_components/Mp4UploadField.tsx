@@ -10,6 +10,7 @@ interface Props {
   defaultValue?: string
   /** Called with the Supabase public URL after a successful upload */
   onCoverGenerated?: (coverUrl: string) => void
+  onUploadComplete?: (videoUrl: string) => void
 }
 
 type Status = "idle" | "uploading" | "done" | "error"
@@ -55,7 +56,7 @@ function extractFirstFrame(file: File): Promise<Blob | null> {
   })
 }
 
-export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: Props) {
+export default function Mp4UploadField({ defaultValue = "", onCoverGenerated, onUploadComplete }: Props) {
   const [url, setUrl] = useState(defaultValue)
   const [status, setStatus] = useState<Status>("idle")
   const [errMsg, setErrMsg] = useState("")
@@ -67,9 +68,11 @@ export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: 
     if (!file) return
 
     if (file.type !== "video/mp4") {
+      onUploadComplete?.("")
       setStatus("error"); setErrMsg("只支持 MP4 格式"); return
     }
     if (file.size > MAX_SIZE) {
+      onUploadComplete?.("")
       setStatus("error")
       setErrMsg(`文件超过 50MB（当前 ${(file.size / 1024 / 1024).toFixed(1)} MB）`)
       return
@@ -87,11 +90,13 @@ export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: 
       .upload(videoPath, file, { contentType: "video/mp4", upsert: false })
 
     if (uploadError) {
+      onUploadComplete?.("")
       setStatus("error"); setErrMsg(uploadError.message); return
     }
 
     const { data: videoData } = supabase.storage.from(BUCKET).getPublicUrl(videoPath)
     setUrl(videoData.publicUrl)
+    onUploadComplete?.(videoData.publicUrl)
     setStatus("done")
 
     // ── Auto-generate cover from first frame ──
@@ -141,7 +146,7 @@ export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: 
         >
           {status === "uploading" ? "上传中…" : "选择 MP4 文件"}
         </button>
-        <input ref={fileRef} type="file" accept="video/mp4" className="hidden" onChange={handleFileChange} />
+        <input ref={fileRef} type="file" accept="video/mp4,.mp4" className="hidden" onChange={handleFileChange} />
         <span className="text-[11px] text-gray-400">最大 50 MB，仅限 MP4</span>
       </div>
 
@@ -166,14 +171,21 @@ export default function Mp4UploadField({ defaultValue = "", onCoverGenerated }: 
         <input
           type="text"
           value={url}
-          onChange={(e) => { setUrl(e.target.value); setStatus("idle") }}
+          onChange={(e) => {
+            setUrl(e.target.value)
+            setStatus("idle")
+            onUploadComplete?.(e.target.value)
+          }}
           placeholder="https://example.com/video.mp4"
           className={inputCls}
         />
       </div>
 
       {url && status !== "error" && (
-        <p className="text-[11px] text-indigo-500 break-all truncate">{url}</p>
+        <div className="space-y-2">
+          <video src={url} controls playsInline preload="metadata" className="aspect-video w-full rounded-xl bg-gray-950 object-contain" />
+          <p className="truncate text-[11px] text-indigo-500">{url}</p>
+        </div>
       )}
     </div>
   )

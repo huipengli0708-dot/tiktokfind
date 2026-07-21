@@ -1,121 +1,132 @@
-import Image from "next/image"
-import Link from "next/link"
-import { Eye, Heart, TrendingUp, ArrowRight, Zap } from "lucide-react"
-import { VideoProduct, formatViewCount } from "@/lib/mock-data"
-import { getContentTypeLabel } from "@/lib/content-types"
-import { cn } from "@/lib/utils"
+import Link from 'next/link'
+import Image from 'next/image'
+import { Play, MessageCircle, Heart, ExternalLink, BarChart3 } from 'lucide-react'
+import type { VideoProduct } from '@/lib/db'
+import { getContentTypeLabel, CONTENT_TYPE_COLORS } from '@/lib/content-types'
+import FavoriteButton from './FavoriteButton'
 
-interface VideoCardProps {
-  video: VideoProduct
-  variant?: "default" | "featured"
+function fmt(n: number): string {
+  if (n >= 10000) return (n / 10000).toFixed(n >= 100000 ? 0 : 1) + '万'
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K'
+  return String(n)
 }
 
-export default function VideoCard({ video, variant = "default" }: VideoCardProps) {
-  const isFeatured = variant === "featured"
+type Props = {
+  video: VideoProduct
+  rank?: number
+}
+
+/** 深色主题视频卡片：封面 3:4 + 排名/类型角标 + 数据 + 商品 + 爆款理由 + 操作区 */
+export default function VideoCard({ video, rank }: Props) {
+  const typeColor = CONTENT_TYPE_COLORS[video.content_type ?? 'merchant'] ?? CONTENT_TYPE_COLORS.merchant
 
   return (
-    <Link href={`/videos/${video.slug}`} className="block group">
-      <article
-        className={cn(
-          "glass-card glass-card-hover rounded-2xl overflow-hidden",
-          isFeatured && "rounded-3xl"
+    <div className="card-dark card-dark-hover flex flex-col overflow-hidden">
+      {/* 封面区 */}
+      <Link href={`/videos/${video.slug}`} className="relative block aspect-[3/4] w-full overflow-hidden bg-[#0B0E15]">
+        {video.coverImage && (
+          <Image
+            src={video.coverImage}
+            alt={video.title}
+            fill
+            className="object-cover transition-transform duration-300 hover:scale-105"
+            sizes="(min-width: 1280px) 300px, 50vw"
+          />
         )}
-      >
-        {/* 封面图 — 9:16 竖版比例 */}
-        <div className="relative aspect-[9/16] overflow-hidden">
-          {video.coverImage ? (
-            <Image
-              src={video.coverImage}
-              alt={video.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            />
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-100 via-purple-50 to-amber-50 flex flex-col items-center justify-center gap-2">
-              <div className="w-12 h-12 rounded-full bg-white/80 flex items-center justify-center shadow-sm">
-                <div className="w-0 h-0 border-t-[7px] border-t-transparent border-b-[7px] border-b-transparent border-l-[12px] border-l-violet-400 ml-1" />
-              </div>
-              <span className="text-[11px] text-gray-400">暂无封面</span>
-            </div>
-          )}
-          {/* 渐变遮罩 */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-          {/* 内容类型标签 */}
-          <div className="absolute top-3 left-3">
-            <span className="px-2.5 py-1 rounded-full text-[11px] font-semibold text-white bg-black/30 backdrop-blur-md border border-white/20">
-              {getContentTypeLabel(video.content_type)}
-            </span>
-          </div>
-
-          {/* 趋势评分角标 — 霓虹 */}
-          <div className="absolute top-3 right-3">
-            <div className="neon-score-badge flex items-center gap-1 px-2 py-1 rounded-full">
-              <TrendingUp size={10} className="text-white" />
-              <span className="text-[11px] font-bold text-white">{video.analysis.trendScore}</span>
-            </div>
-          </div>
-
-          {/* 底部数据 + ROI */}
-          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1 text-white/90 text-xs">
-                <Eye size={11} />
-                {formatViewCount(video.viewCount)}
-              </span>
-              <span className="flex items-center gap-1 text-white/90 text-xs">
-                <Heart size={11} />
-                {formatViewCount(video.likeCount)}
-              </span>
-            </div>
-            {/* ROI 标签 — 霓虹绿 */}
-            <span className="neon-roi-badge flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold">
-              <Zap size={9} />
-              {video.roi}
-            </span>
-          </div>
-        </div>
-
-        {/* 内容区 */}
-        <div className="p-2.5 sm:p-4">
-          {/* 标签行：新手友好 + 原标签 — 仅桌面显示 */}
-          <div className="hidden sm:flex flex-wrap gap-1.5 mb-2.5">
-            {video.beginnerFriendly && (
-              <span className="tag-pill-beginner">✦ 新手友好</span>
+        {/* 排名 + 24h 播放 */}
+        {rank != null && (
+          <div className="absolute left-0 top-0 rounded-br-2xl bg-black/75 px-3 py-2 backdrop-blur-sm">
+            <p className="text-lg font-black leading-none text-white">#{rank}</p>
+            {video.views24h && (
+              <p className="mt-1 text-[11px] font-medium leading-none text-gray-300">24h +{video.views24h}</p>
             )}
-            {video.tags.slice(0, 2).map((tag) => (
-              <span key={tag} className="tag-pill">{tag}</span>
-            ))}
           </div>
+        )}
 
-          {/* 标题 */}
-          <h3 className={cn(
-            "font-semibold text-gray-800 leading-snug mb-2 group-hover:text-violet-600 transition-colors line-clamp-2",
-            isFeatured ? "text-base" : "text-[13px] sm:text-[14px]"
-          )}>
-            {video.title}
-          </h3>
+        {/* 类型角标 */}
+        <span className={`absolute right-2 top-2 rounded-md px-2 py-1 text-[11px] font-bold text-white ${typeColor.badge}`}>
+          {getContentTypeLabel(video.content_type)}
+        </span>
 
-          {/* 爆点结论 — 仅桌面显示 */}
-          <p className="hidden sm:block text-xs font-medium text-violet-700/80 bg-violet-50/70 border border-violet-100/60 rounded-lg px-3 py-1.5 leading-relaxed mb-3">
-            💡 {video.punchline}
+        {/* 数据浮层 */}
+        {(video.viewCount > 0 || video.likeCount > 0) && (
+          <div className="absolute bottom-2 right-2 flex flex-col items-end gap-1 rounded-lg bg-black/65 px-2.5 py-2 text-[11px] font-semibold text-white backdrop-blur-sm">
+            {video.viewCount > 0 && (
+              <span className="flex items-center gap-1"><Play size={11} /> {fmt(video.viewCount)}</span>
+            )}
+            {video.commentCount > 0 && (
+              <span className="flex items-center gap-1"><MessageCircle size={11} /> {fmt(video.commentCount)}</span>
+            )}
+            {video.likeCount > 0 && (
+              <span className="flex items-center gap-1"><Heart size={11} /> {fmt(video.likeCount)}</span>
+            )}
+          </div>
+        )}
+      </Link>
+
+      {/* 信息区 */}
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        {/* 账号行 / 标题 */}
+        <div className="flex items-center justify-between gap-2">
+          <p className="truncate text-sm font-semibold text-white">
+            {video.account ? `@${video.account.replace(/^@/, '')}` : video.title}
           </p>
+          <span className="shrink-0 text-xs text-gray-500">{video.category}</span>
+        </div>
 
-          {/* 底部行 */}
-          <div className="flex items-center justify-between mt-1">
-            <div className="hidden sm:flex items-center gap-1.5">
-              <span className="text-[11px] text-gray-400">利润率</span>
-              <span className="text-[11px] font-semibold text-emerald-600">
-                {video.analysis.profitMargin}
-              </span>
-            </div>
-            <span className="flex items-center gap-0.5 text-violet-500 text-[11px] sm:text-xs font-medium group-hover:gap-1.5 transition-all sm:ml-auto">
-              查看 <ArrowRight size={10} />
-            </span>
+        {/* 商品行 */}
+        <div className="flex items-center gap-3 rounded-xl bg-white/5 p-2.5">
+          <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg bg-[#0B0E15]">
+            {(video.productImage || video.coverImage) && (
+              <Image
+                src={video.productImage || video.coverImage}
+                alt=""
+                fill
+                className="object-cover"
+                sizes="44px"
+              />
+            )}
+          </div>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[13px] font-medium text-gray-200">
+              {video.productName || video.title}
+            </p>
+            {video.productPrice && (
+              <p className="text-[13px] font-bold text-[#7CB1FF]">{video.productPrice}</p>
+            )}
           </div>
         </div>
-      </article>
-    </Link>
+
+        {/* 爆款理由 */}
+        {video.punchline && (
+          <div>
+            <p className="text-xs font-bold text-gray-400">爆款理由</p>
+            <p className="mt-1 line-clamp-2 text-[13px] leading-snug text-gray-300">{video.punchline}</p>
+          </div>
+        )}
+
+        {/* 操作区 */}
+        <div className="mt-auto flex items-center gap-2 pt-1">
+          <Link
+            href={`/videos/${video.slug}`}
+            className="btn-blue flex flex-1 items-center justify-center gap-1.5 px-3 py-2 text-[13px]"
+          >
+            <BarChart3 size={14} /> 查看分析
+          </Link>
+          {video.videoUrl && (
+            <a
+              href={video.videoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-dark-outline flex items-center justify-center gap-1.5 px-3 py-2 text-[13px]"
+            >
+              原视频 <ExternalLink size={13} />
+            </a>
+          )}
+          <FavoriteButton targetType="video" targetId={video.id} dark />
+        </div>
+      </div>
+    </div>
   )
 }

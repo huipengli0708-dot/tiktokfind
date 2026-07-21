@@ -30,6 +30,7 @@ export default function SimpleVideoForm() {
   const [slugEdited, setSlugEdited] = useState(false)
   /** Auto-filled from mp4 first-frame extraction */
   const [autoCoverUrl, setAutoCoverUrl] = useState("")
+  const [uploadedVideoUrl, setUploadedVideoUrl] = useState("")
 
   function onTitleChange(v: string) {
     setTitle(v)
@@ -56,8 +57,8 @@ export default function SimpleVideoForm() {
       <input type="hidden" name="content_strategy"     value="" />
       <input type="hidden" name="risk_notes"           value="" />
       <input type="hidden" name="trendScore"           value="" />
-      <input type="hidden" name="viewCount"            value="0" />
-      <input type="hidden" name="likeCount"            value="0" />
+      <input type="hidden" name="commentCount"         value="0" />
+      <input type="hidden" name="productPrice"         value="" />
       <input type="hidden" name="is_published"         value="on" />
       <input type="hidden" name="shouldDo"             value="on" />
 
@@ -75,6 +76,17 @@ export default function SimpleVideoForm() {
             type="text" name="title" required
             value={title} onChange={e => onTitleChange(e.target.value)}
             placeholder="例：迷你榨汁杯 TikTok单周破万单"
+            className={inputCls}
+          />
+        </div>
+
+        <div>
+          <label className={labelCls}>产品或主题名称 *</label>
+          <input
+            type="text"
+            name="productName"
+            required
+            placeholder="例：充气日光泳池躺椅"
             className={inputCls}
           />
         </div>
@@ -104,6 +116,7 @@ export default function SimpleVideoForm() {
               onChange={e => {
                 setSourceType(e.target.value as "tiktok" | "mp4")
                 setAutoCoverUrl("")
+                setUploadedVideoUrl("")
               }}
               className={selectCls}
             >
@@ -124,7 +137,7 @@ export default function SimpleVideoForm() {
             <div>
               <label className={labelCls}>TikTok 链接</label>
               <input
-                type="text" name="video_url"
+                type="url" name="video_url" required
                 placeholder="https://www.tiktok.com/..."
                 className={inputCls}
               />
@@ -146,10 +159,14 @@ export default function SimpleVideoForm() {
             {/* mp4: video_url is empty string */}
             <input type="hidden" name="video_url" value="" />
             {/* cover_image is auto-generated — hidden input already rendered above */}
-            <Mp4UploadField onCoverGenerated={setAutoCoverUrl} />
+            <Mp4UploadField
+              onCoverGenerated={setAutoCoverUrl}
+              onUploadComplete={setUploadedVideoUrl}
+            />
             {/* Preview of auto-generated cover */}
             {autoCoverUrl && (
               <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50/60 border border-emerald-100">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={autoCoverUrl}
                   alt="封面预览"
@@ -171,13 +188,43 @@ export default function SimpleVideoForm() {
           />
         </div>
 
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className={labelCls}>创作者账号</label>
+            <input type="text" name="account" placeholder="例：@creator" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>24 小时增长</label>
+            <input type="text" name="views24h" placeholder="例：143%" className={inputCls} />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4">
+          <div>
+            <label className={labelCls}>播放量</label>
+            <input type="number" min="0" name="viewCount" placeholder="0" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>点赞量</label>
+            <input type="number" min="0" name="likeCount" placeholder="0" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>预估 GMV</label>
+            <input type="text" name="estimatedGMV" placeholder="例：$126.4K" className={inputCls} />
+          </div>
+        </div>
+
       </div>
 
       <div className="flex items-center gap-3 justify-end pb-8">
         <a href="/admin/videos" className="px-5 py-2.5 rounded-xl text-sm font-medium btn-outline-glass">
           取消
         </a>
-        <button type="submit" className="px-6 py-2.5 rounded-xl text-sm font-semibold btn-gradient">
+        <button
+          type="submit"
+          disabled={sourceType === "mp4" && !uploadedVideoUrl}
+          className="px-6 py-2.5 rounded-xl text-sm font-semibold btn-gradient disabled:cursor-not-allowed disabled:opacity-45"
+        >
           保存并发布
         </button>
       </div>

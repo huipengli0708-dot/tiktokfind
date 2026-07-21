@@ -8,21 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -45,76 +31,29 @@
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ===== 薄荷绿主题（参考「今天去哪遛娃」小程序）===== */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.98 0.01 165);
+  --foreground: oklch(0.32 0.04 180);        /* 深墨绿文字 */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.32 0.04 180);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --popover-foreground: oklch(0.32 0.04 180);
+  --primary: oklch(0.68 0.12 168);           /* 薄荷绿 ≈ #2FAE8B */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.03 165);
+  --secondary-foreground: oklch(0.42 0.07 175);
+  --muted: oklch(0.95 0.02 165);
+  --muted-foreground: oklch(0.55 0.03 175);
+  --accent: oklch(0.92 0.05 165);
+  --accent-foreground: oklch(0.4 0.08 172);
+  --destructive: oklch(0.6 0.2 27);
+  --border: oklch(0.9 0.03 168);
+  --input: oklch(0.9 0.03 168);
+  --ring: oklch(0.68 0.12 168);
+  --radius: 1rem;
 }
 
 @layer base {
@@ -122,130 +61,109 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-color: #05070D; /* 前台深色星空底；后台页面用 .page-bg 自行覆盖 */
   }
   html {
     @apply font-sans;
   }
 }
 
-/* ===== 全站视觉风格 — Soft Dreamy Theme ===== */
-
-/* 页面背景 — 柔和薰衣草渐变 */
+/* 页面背景 — 薄荷绿→奶油渐变 */
 .page-bg {
-  background: linear-gradient(145deg, #F8F7FC 0%, #F2EEFF 40%, #FBF8FF 70%, #FFF7F0 100%);
+  background: linear-gradient(175deg, #E3F5EC 0%, #F0FAF4 40%, #FBFAF2 80%, #FDF8EC 100%);
   min-height: 100vh;
+}
+
+/* Hero 横幅 */
+.hero-band {
+  background: linear-gradient(135deg, #D2F0E0 0%, #E8F7EE 55%, #F5F2DF 100%);
   position: relative;
-}
-
-/* 白色毛玻璃卡片 */
-.glass-card {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 92, 246, 0.08);
-  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
-}
-
-.glass-card-hover {
-  transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.13), 0 4px 12px rgba(0, 0, 0, 0.05);
-  transform: translateY(-3px);
-  border-color: rgba(139, 92, 246, 0.16);
-}
-
-/* 轻量玻璃导航 */
-.glass-nav {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.09);
-  box-shadow: 0 2px 16px rgba(139, 92, 246, 0.06);
-}
-
-/* 主按钮 — 柔和紫色渐变 */
-.btn-gradient {
-  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 60%, #C4B5FD 100%);
-  color: white;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.btn-gradient:hover {
-  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.45), 0 0 0 4px rgba(139, 92, 246, 0.10);
-  transform: translateY(-1px) scale(1.02);
-}
-.btn-gradient:active {
-  transform: translateY(0px) scale(0.98);
-}
-
-/* 描边次按钮 */
-.btn-outline-glass {
-  background: rgba(255, 255, 255, 0.70);
-  backdrop-filter: blur(8px);
-  border: 1.5px solid rgba(139, 92, 246, 0.25);
-  color: #7C3AED;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.btn-outline-glass:hover {
-  background: rgba(139, 92, 246, 0.06);
-  border-color: rgba(139, 92, 246, 0.45);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.12);
-  transform: translateY(-1px) scale(1.01);
-}
-
-/* 光晕装饰球 */
-.glow-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 全站背景模糊光斑层 — 柔和梦幻 */
-.page-bg::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 40% at 15% 20%, rgba(139,92,246,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 50% at 85% 10%, rgba(250,204,21,0.05) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 60% at 50% 85%, rgba(167,139,250,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 55% 35% at 80% 55%, rgba(251,146,60,0.04) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* 趋势评分条 */
-.trend-bar-track {
-  background: rgba(139, 92, 246, 0.10);
-  border-radius: 999px;
-  height: 6px;
   overflow: hidden;
 }
-.trend-bar-fill {
-  background: linear-gradient(90deg, #8B5CF6, #A78BFA);
+.hero-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 220px at 85% 20%, rgba(255,255,255,0.55) 0%, transparent 70%),
+    radial-gradient(circle 160px at 10% 80%, rgba(255,255,255,0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* 深墨绿 Hero（配 FloatingLines 动效） */
+.hero-dark {
+  background: linear-gradient(135deg, #0C2B23 0%, #123D32 55%, #1A5244 100%);
+}
+
+/* 白色圆角卡片 */
+.card-soft {
+  background: #fff;
+  border: 1px solid rgba(47, 174, 139, 0.08);
+  box-shadow: 0 4px 20px rgba(47, 174, 139, 0.07), 0 1px 3px rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+}
+.card-soft-hover {
+  transition: all 0.25s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.card-soft-hover:hover {
+  box-shadow: 0 10px 32px rgba(47, 174, 139, 0.14), 0 3px 8px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+  border-color: rgba(47, 174, 139, 0.18);
+}
+
+/* 功能入口卡（浅绿 / 浅黄） */
+.feature-card-green {
+  background: linear-gradient(135deg, #E9F8EF 0%, #F4FBF3 100%);
+  border: 1px solid rgba(47, 174, 139, 0.12);
+  border-radius: 20px;
+}
+.feature-card-yellow {
+  background: linear-gradient(135deg, #FDF6E0 0%, #FDFAEF 100%);
+  border: 1px solid rgba(217, 164, 42, 0.15);
+  border-radius: 20px;
+}
+
+/* 主按钮 — 薄荷绿圆角 */
+.btn-mint {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+  color: #fff;
   border-radius: 999px;
-  height: 100%;
-  transition: width 0.8s ease;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(47, 174, 139, 0.32);
+  transition: all 0.22s ease;
+}
+.btn-mint:hover {
+  box-shadow: 0 6px 20px rgba(47, 174, 139, 0.42);
+  transform: translateY(-1px);
+}
+.btn-mint:active {
+  transform: translateY(0) scale(0.98);
 }
 
-/* 评分角标 — 柔和紫 */
-.neon-score-badge {
-  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
-  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.35);
-  backdrop-filter: blur(8px);
+/* GO 小按钮 */
+.btn-go {
+  background: #fff;
+  color: #2FAE8B;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 6px 16px;
+  box-shadow: 0 2px 8px rgba(47, 174, 139, 0.18);
+  transition: all 0.2s ease;
+}
+.btn-go:hover {
+  box-shadow: 0 4px 14px rgba(47, 174, 139, 0.3);
+  transform: translateY(-1px);
 }
 
-/* ROI 角标 — 温暖黄/橙 */
-.neon-roi-badge {
-  background: rgba(250, 204, 21, 0.15);
-  border: 1px solid rgba(250, 204, 21, 0.35);
-  color: #B45309;
-  backdrop-filter: blur(8px);
+/* 顶部导航 — 悬浮深色玻璃胶囊（React Bits 风格） */
+.nav-glass {
+  background: rgba(14, 14, 20, 0.55);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 /* 胶囊标签 */
@@ -256,229 +174,290 @@
   border-radius: 999px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  background: rgba(139, 92, 246, 0.08);
-  color: #7C3AED;
-  border: 1px solid rgba(139, 92, 246, 0.15);
+  background: rgba(47, 174, 139, 0.09);
+  color: #1E8A6E;
+  border: 1px solid rgba(47, 174, 139, 0.16);
   white-space: nowrap;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-}
-.tag-pill:hover {
-  background: rgba(139, 92, 246, 0.13);
-  border-color: rgba(139, 92, 246, 0.28);
 }
 
-.tag-pill-active {
-  background: linear-gradient(135deg, #8B5CF6, #A78BFA);
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.32);
-}
-
-/* 新手友好标签 — 温暖黄 */
-.tag-pill-beginner {
+/* 黄色标签（想去/推荐 风格） */
+.tag-warm {
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
   border-radius: 999px;
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  background: rgba(250, 204, 21, 0.12);
-  color: #B45309;
-  border: 1px solid rgba(250, 204, 21, 0.30);
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
-}
-
-/* 动画 */
-@keyframes float-y {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-@keyframes slow-pulse {
-  0%, 100% { opacity: 0.20; }
-  50% { opacity: 0.40; }
-}
-.float-anim { animation: float-y 7s ease-in-out infinite; }
-.slow-pulse { animation: slow-pulse 5s ease-in-out infinite; }
-
-/* 滚动条 */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.18);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(139, 92, 246, 0.32);
-}
-
-/* ===== HOME / FEED THEME ===== */
-
-/* 首页背景 — 柔和薰衣草 */
-.app-bg {
-  background: linear-gradient(160deg, #F0EEFF 0%, #F8F6FF 50%, #FFF6EE 100%);
-  min-height: 100vh;
-  position: relative;
-}
-
-/* Banner 占位 */
-.app-banner-empty {
-  background: rgba(139, 92, 246, 0.05);
-  border: 1px solid rgba(139, 92, 246, 0.10);
-}
-
-/* Feed 列表卡片 */
-.app-feed-card {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(139, 92, 246, 0.07);
-  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-/* Feature card – 柔和紫 */
-.app-card-purple {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.10) 0%, rgba(167, 139, 250, 0.07) 100%);
-  border: 1px solid rgba(139, 92, 246, 0.14);
-  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.07);
-}
-
-/* Feature card – 柔和绿 */
-.app-card-teal {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.09) 0%, rgba(5, 150, 105, 0.06) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.14);
-  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.07);
-}
-
-/* Feature card – 中性浅色 */
-.app-card-dark {
-  background: rgba(255, 255, 255, 0.60);
-  border: 1px solid rgba(139, 92, 246, 0.07);
-}
-
-/* 底部导航栏 */
-.app-bottom-nav {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-top: 1px solid rgba(139, 92, 246, 0.08);
-  box-shadow: 0 -4px 20px rgba(139, 92, 246, 0.06);
-}
-
-/* ===== DESKTOP THEME ===== */
-
-/* 桌面顶部导航 */
-.app-desktop-nav {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.08);
-  box-shadow: 0 2px 16px rgba(139, 92, 246, 0.06);
-}
-
-/* Desktop sidebar */
-.app-sidebar {
-  background: rgba(255, 255, 255, 0.95);
-  border-right: 1px solid rgba(139, 92, 246, 0.08);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-}
-
-/* Desktop main content card */
-.app-desktop-card {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(139, 92, 246, 0.07);
-  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.05);
-}
-
-/* ===== DECORATIVE VISUAL LANGUAGE ===== */
-
-/* 圆点网格纹理 */
-.dot-pattern {
-  background-image: radial-gradient(circle, rgba(139,92,246,0.18) 1.5px, transparent 1.5px);
-  background-size: 22px 22px;
-}
-
-/* 细圆点 (更稀疏) */
-.dot-pattern-sm {
-  background-image: radial-gradient(circle, rgba(139,92,246,0.12) 1px, transparent 1px);
-  background-size: 16px 16px;
-}
-
-/* 渐变文字 */
-.gradient-text-violet {
-  background: linear-gradient(135deg, #7C3AED 0%, #A78BFA 55%, #E879F9 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* 贴纸基础样式 — 3D sticker pill */
-.hero-sticker {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  border-radius: 999px;
-  font-size: 12px;
   font-weight: 700;
+  background: #FBF0D3;
+  color: #B07C18;
   white-space: nowrap;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 4px 18px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.5);
-  position: absolute;
-  pointer-events: none;
 }
 
-/* 图标气泡 — squircle icon bubble */
-.icon-bubble {
+/* Tab 胶囊组（本周计划/想去/去过 风格） */
+.tab-capsule-group {
+  background: #fff;
+  border-radius: 999px;
+  padding: 5px;
+  border: 1px solid rgba(47, 174, 139, 0.12);
+  box-shadow: 0 2px 10px rgba(47, 174, 139, 0.07);
+  display: inline-flex;
+  gap: 4px;
+}
+.tab-capsule {
+  padding: 9px 28px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #47695E;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+}
+.tab-capsule:hover {
+  background: rgba(47, 174, 139, 0.07);
+}
+.tab-capsule-active {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(47, 174, 139, 0.3);
+}
+.tab-capsule-active:hover {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+}
+
+/* 筛选 chip 组（推荐/最近/免费 风格） */
+.chip {
+  padding: 7px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #47695E;
+  background: #EFF6F1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.chip:hover {
+  background: #E2F1E8;
+}
+.chip-active {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(47, 174, 139, 0.28);
+}
+.chip-active:hover {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+}
+
+/* 搜索框 */
+.search-shell {
+  background: #fff;
+  border-radius: 999px;
+  box-shadow: 0 6px 24px rgba(47, 174, 139, 0.12), 0 2px 6px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(47, 174, 139, 0.08);
+}
+
+/* 收藏心形按钮 */
+.fav-btn {
+  transition: all 0.18s ease;
+  cursor: pointer;
+}
+.fav-btn:hover {
+  transform: scale(1.12);
+}
+
+/* 分类图标气泡 */
+.cat-bubble {
+  width: 64px;
+  height: 64px;
+  border-radius: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 28% 32% 26% 30%;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.4);
+  font-size: 30px;
+  transition: all 0.2s ease;
+}
+.cat-bubble:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* 空状态 */
+.empty-hint {
+  color: #7A9C8F;
+}
+
+/* ===== 深色星空主题（前台统一配色）===== */
+
+/* 页面背景 — 近黑深空 + 微弱星云光斑 */
+.page-dark-bg {
+  background:
+    radial-gradient(ellipse 55% 45% at 20% 15%, rgba(32, 68, 96, 0.28) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 50% at 85% 25%, rgba(56, 40, 100, 0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 55% 90%, rgba(20, 60, 70, 0.20) 0%, transparent 65%),
+    #05070D;
+}
+
+/* 静态星点（纯 CSS，内页用） */
+.star-dots::before {
+  content: '';
   position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.2px 1.2px at 12% 18%, rgba(255,255,255,0.55) 50%, transparent 51%),
+    radial-gradient(1px 1px at 27% 62%, rgba(190,215,255,0.45) 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 44% 28%, rgba(255,255,255,0.4) 50%, transparent 51%),
+    radial-gradient(1px 1px at 58% 78%, rgba(255,235,190,0.4) 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 71% 12%, rgba(255,255,255,0.5) 50%, transparent 51%),
+    radial-gradient(1px 1px at 83% 55%, rgba(190,200,255,0.42) 50%, transparent 51%),
+    radial-gradient(1.3px 1.3px at 92% 88%, rgba(255,255,255,0.38) 50%, transparent 51%),
+    radial-gradient(1px 1px at 8% 88%, rgba(255,255,255,0.35) 50%, transparent 51%);
+  background-size: 420px 420px;
+  background-repeat: repeat;
+  opacity: 0.7;
   pointer-events: none;
-  font-size: 22px;
 }
 
-/* 多种浮动动画变体 — 保持各自旋转角度 */
-@keyframes float-a {
-  0%, 100% { transform: translateY(0) rotate(-3deg); }
-  50%       { transform: translateY(-8px) rotate(-3deg); }
+/* 深色卡片 */
+.card-dark {
+  background: rgba(17, 21, 30, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
-@keyframes float-b {
-  0%, 100% { transform: translateY(0) rotate(2deg); }
-  50%       { transform: translateY(-10px) rotate(2deg); }
+.card-dark-hover {
+  transition: all 0.22s ease;
 }
-@keyframes float-c {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50%       { transform: translateY(-6px) rotate(-1deg); }
+.card-dark-hover:hover {
+  border-color: rgba(59, 130, 246, 0.45);
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.12);
+  transform: translateY(-2px);
 }
-@keyframes float-d {
-  0%, 100% { transform: translateY(0) rotate(4deg); }
-  50%       { transform: translateY(-12px) rotate(4deg); }
-}
-@keyframes float-bubble {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%       { transform: translateY(-6px) scale(1.04); }
-}
-.float-a { animation: float-a 6s ease-in-out infinite; }
-.float-b { animation: float-b 8s ease-in-out infinite 1s; }
-.float-c { animation: float-c 7s ease-in-out infinite 2s; }
-.float-d { animation: float-d 9s ease-in-out infinite 0.5s; }
-.float-e { animation: float-b 7.5s ease-in-out infinite 1.5s; }
-.float-bubble-a { animation: float-bubble 5s ease-in-out infinite; }
-.float-bubble-b { animation: float-bubble 7s ease-in-out infinite 1.2s; }
-.float-bubble-c { animation: float-bubble 6s ease-in-out infinite 2.4s; }
 
-/* 特色卡片顶部色条 */
-.feature-card-strip {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  border-radius: 999px 999px 0 0;
+/* 主按钮 — 蓝色 */
+.btn-blue {
+  background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-blue:hover {
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.45);
+  transform: translateY(-1px);
+}
+
+/* 深色描边按钮 */
+.btn-dark-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.btn-dark-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 类型筛选 chip */
+.chip-dark {
+  padding: 7px 16px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.chip-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.chip-dark-active {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: rgba(59, 130, 246, 0.6);
+  color: #fff;
+}
+
+/* 下划线 Tab */
+.tab-underline {
+  padding: 10px 4px;
+  margin-right: 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.tab-underline:hover {
+  color: #fff;
+}
+.tab-underline-active {
+  color: #fff;
+  border-bottom-color: #3B82F6;
+}
+
+/* 深色输入框 */
+.input-dark {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: #fff;
+  transition: border-color 0.18s ease;
+}
+.input-dark::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.input-dark:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+/* ===== 后台兼容类（旧页面使用的类名，映射到薄荷绿主题）===== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(47, 174, 139, 0.1);
+  box-shadow: 0 4px 20px rgba(47, 174, 139, 0.07);
+}
+.btn-gradient {
+  background: linear-gradient(135deg, #2FAE8B 0%, #3EBD93 100%);
+  color: white;
+  box-shadow: 0 4px 14px rgba(47, 174, 139, 0.32);
+  transition: all 0.22s ease;
+}
+.btn-gradient:hover {
+  box-shadow: 0 6px 20px rgba(47, 174, 139, 0.42);
+  transform: translateY(-1px);
+}
+.btn-outline-glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid rgba(47, 174, 139, 0.28);
+  color: #1E8A6E;
+  transition: all 0.22s ease;
+}
+.btn-outline-glass:hover {
+  background: rgba(47, 174, 139, 0.06);
+  border-color: rgba(47, 174, 139, 0.45);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(47, 174, 139, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(47, 174, 139, 0.35);
 }

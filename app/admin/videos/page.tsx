@@ -12,8 +12,17 @@ export const dynamic = "force-dynamic"
 
 const CONTENT_TYPE_STYLE: Record<string, string> = {
   "商家实拍": "!bg-blue-50/80 !text-blue-600 !border-blue-200/60",
+  "merchant": "!bg-blue-50/80 !text-blue-600 !border-blue-200/60",
   "达人":    "!bg-purple-50/80 !text-purple-600 !border-purple-200/60",
+  "creator": "!bg-purple-50/80 !text-purple-600 !border-purple-200/60",
   "AI":      "!bg-emerald-50/80 !text-emerald-600 !border-emerald-200/60",
+  "ai":      "!bg-emerald-50/80 !text-emerald-600 !border-emerald-200/60",
+}
+
+const CONTENT_TYPE_LABEL: Record<string, string> = {
+  merchant: "商家实拍",
+  creator: "达人",
+  ai: "AI",
 }
 
 interface PageProps {
@@ -60,6 +69,14 @@ export default async function AdminVideosPage({ searchParams }: PageProps) {
               <PlusCircle size={15} /> 新增视频
             </Link>
           </div>
+        </div>
+
+        {/* ── 后台导航 ── */}
+        <div className="mb-5 flex gap-2">
+          <span className="btn-gradient rounded-full px-4 py-1.5 text-sm font-semibold">爆款视频</span>
+          <Link href="/admin/products" className="btn-outline-glass rounded-full px-4 py-1.5 text-sm font-semibold">
+            每日新品
+          </Link>
         </div>
 
         {/* ── 搜索 + 分类筛选（GET 表单，无 JS 也能用） ── */}
@@ -134,7 +151,7 @@ export default async function AdminVideosPage({ searchParams }: PageProps) {
                     <td className="px-4 py-3.5 hidden lg:table-cell">
                       {video.content_type && (
                         <span className={`tag-pill ${CONTENT_TYPE_STYLE[video.content_type] ?? ""}`}>
-                          {video.content_type}
+                          {CONTENT_TYPE_LABEL[video.content_type] ?? video.content_type}
                         </span>
                       )}
                     </td>

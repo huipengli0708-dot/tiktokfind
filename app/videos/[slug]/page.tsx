@@ -1,237 +1,229 @@
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import {
-  ArrowLeft, AlertTriangle, ArrowRight, Eye, Heart,
-} from "lucide-react"
-import { getVideoBySlug, getAllSlugs, getAllVideos } from "@/lib/db"
-import { formatViewCount } from "@/lib/mock-data"
-import TrendScore from "@/components/TrendScore"
-import TagBadge from "@/components/TagBadge"
-import CTASection from "@/components/CTASection"
-import VideoCard from "@/components/VideoCard"
-import type { Metadata } from "next"
+import Link from 'next/link'
+import Image from 'next/image'
+import { notFound } from 'next/navigation'
+import { ArrowLeft, Flame, ExternalLink, TrendingUp, Users, Lightbulb, AlertTriangle } from 'lucide-react'
+import { getVideoBySlug } from '@/lib/db'
+import { getContentTypeLabel, CONTENT_TYPE_COLORS } from '@/lib/content-types'
+import FavoriteButton from '@/components/FavoriteButton'
+import StarBackdrop from '@/components/StarBackdrop'
 
-interface Props {
-  params: Promise<{ slug: string }>
-}
+export const revalidate = 60
 
-export async function generateStaticParams() {
-  const slugs = await getAllSlugs()
-  return slugs.map((slug) => ({ slug }))
-}
+type Props = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props) {
   const { slug } = await params
   const video = await getVideoBySlug(slug)
-  if (!video) return { title: "未找到" }
-  return {
-    title: video.title,
-    description: video.shortDescription,
-  }
+  return { title: video?.title ?? '爆款拆解' }
 }
 
 export default async function VideoDetailPage({ params }: Props) {
   const { slug } = await params
-  const [video, allVideos] = await Promise.all([
-    getVideoBySlug(slug),
-    getAllVideos(),
-  ])
+  const video = await getVideoBySlug(slug)
   if (!video) notFound()
 
-  const relatedVideos = allVideos
-    .filter((v) => v.id !== video.id && (v.category === video.category || v.tags.some(t => video.tags.includes(t))))
-    .slice(0, 3)
-
-  const competitionColor = {
-    低: "text-emerald-600 bg-emerald-50 border-emerald-200",
-    中: "text-amber-600 bg-amber-50 border-amber-200",
-    高: "text-rose-600 bg-rose-50 border-rose-200",
-  }[video.analysis.competitionLevel]
+  const { analysis, verdict } = video
+  const typeColor = CONTENT_TYPE_COLORS[video.content_type ?? 'merchant'] ?? CONTENT_TYPE_COLORS.merchant
 
   return (
-    <div className="page-bg">
-      <div className="glow-orb w-96 h-96 bg-violet-200/20 top-0 right-0 slow-pulse" />
-      <div className="glow-orb w-72 h-72 bg-amber-200/15 top-40 -left-20" />
+    <div className="relative min-h-screen">
+      <StarBackdrop />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 py-8">
-
-        {/* 返回按钮 */}
-        <Link
-          href="/videos"
-          className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-violet-600 transition-colors mb-6 group"
-        >
-          <ArrowLeft size={15} className="group-hover:-translate-x-0.5 transition-transform" />
-          返回视频列表
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-24 pt-24">
+        {/* 返回 */}
+        <Link href="/picks" className="inline-flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white">
+          <ArrowLeft size={16} /> 返回趋势列表
         </Link>
 
-        {/* 封面 + 基础信息 */}
-        <div className="glass-card rounded-3xl overflow-hidden mb-6">
-          {/* 封面图 / 视频区 — 9:16 竖版布局 */}
-          {video.video_source_type === "mp4" && video.video_file_url ? (
-            /* MP4: centered vertical player, max 65vh tall */
-            <div className="relative bg-black flex justify-center">
-              <div className="relative w-full max-w-sm">
-                <video
-                  src={video.video_file_url}
-                  controls
-                  playsInline
-                  className="w-full aspect-[9/16] max-h-[65vh] object-contain"
-                  poster={video.coverImage || undefined}
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/50 backdrop-blur-md border border-white/20">
-                    {video.category}
-                  </span>
-                </div>
-                <div className="absolute bottom-4 right-4 flex items-center gap-3">
-                  <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
-                    <Eye size={11} /> {formatViewCount(video.viewCount)}
-                  </span>
-                  <span className="flex items-center gap-1 text-white/90 text-xs bg-black/50 backdrop-blur-md px-2 py-1 rounded-full">
-                    <Heart size={11} /> {formatViewCount(video.likeCount)}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* TikTok / static cover — 9:16 with fallback placeholder */
-            <div className="relative aspect-[9/16] max-h-[65vh] overflow-hidden bg-gradient-to-br from-violet-100 via-purple-50 to-amber-50">
-              {video.coverImage ? (
-                <>
-                  <Image
-                    src={video.coverImage}
-                    alt={video.title}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                </>
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="flex flex-col items-center gap-3 text-gray-400">
-                    <div className="w-16 h-16 rounded-full bg-white/60 flex items-center justify-center">
-                      <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-violet-400 ml-1" />
-                    </div>
-                    <span className="text-xs">暂无封面</span>
-                  </div>
-                </div>
-              )}
-
-              {/* 播放按钮占位 (only when cover exists) */}
-              {video.coverImage && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-all hover:scale-105">
-                    <div className="w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-white ml-1" />
-                  </div>
-                </div>
-              )}
-
-              <div className="absolute top-4 left-4">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold text-white bg-black/30 backdrop-blur-md border border-white/20">
+        {/* 头部卡 */}
+        <div className="card-dark mt-4 p-8">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={`rounded-md px-2.5 py-1 text-xs font-bold text-white ${typeColor.badge}`}>
+                  {getContentTypeLabel(video.content_type)}
+                </span>
+                <span className="rounded-md bg-white/8 px-2.5 py-1 text-xs font-semibold text-gray-300">
                   {video.category}
                 </span>
+                {video.beginnerFriendly && (
+                  <span className="rounded-md bg-[#F5D77C]/15 px-2.5 py-1 text-xs font-bold text-[#F5D77C]">新手友好</span>
+                )}
               </div>
-              <div className="absolute bottom-4 right-4 flex items-center gap-3">
-                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
-                  <Eye size={11} /> {formatViewCount(video.viewCount)}
+              <h1 className="mt-3 text-3xl font-black text-white">{video.title}</h1>
+              {video.account && (
+                <p className="mt-1.5 text-sm text-gray-400">@{video.account.replace(/^@/, '')}</p>
+              )}
+              {video.punchline && (
+                <p className="mt-2 text-lg font-medium text-[#7CB1FF]">“{video.punchline}”</p>
+              )}
+              <p className="mt-2 text-[15px] text-gray-300">{video.shortDescription}</p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {video.tags.map((t) => (
+                  <span key={t} className="rounded-full bg-white/6 px-3 py-1 text-xs font-medium text-gray-300">
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-col items-center gap-3">
+              <FavoriteButton targetType="video" targetId={video.id} size={20} dark />
+              {analysis.trendScore > 0 && (
+                <span className="flex flex-col items-center rounded-2xl bg-white/6 px-4 py-2">
+                  <span className="flex items-center gap-1 text-2xl font-black text-[#F97316]">
+                    <Flame size={20} className="fill-[#F97316]" />
+                    {analysis.trendScore}
+                  </span>
+                  <span className="text-xs font-semibold text-gray-500">趋势分</span>
                 </span>
-                <span className="flex items-center gap-1 text-white/90 text-xs bg-black/30 backdrop-blur-md px-2 py-1 rounded-full">
-                  <Heart size={11} /> {formatViewCount(video.likeCount)}
-                </span>
-              </div>
+              )}
             </div>
-          )}
-
-          {/* 标题 + 标签 + 核心指标 */}
-          <div className="p-5 md:p-7">
-            <div className="flex flex-wrap gap-2 mb-3">
-              {video.tags.map((tag) => (
-                <TagBadge key={tag} label={tag} />
-              ))}
-            </div>
-            <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-snug mb-3">
-              {video.title}
-            </h1>
-            <p className="text-gray-500 text-sm leading-relaxed mb-5">
-              {video.shortDescription}
-            </p>
-
-            {/* 核心指标行 */}
-            <div className="grid grid-cols-3 gap-3 mb-5">
-              <div className="glass-card rounded-xl p-3 text-center">
-                <div className="text-xs text-gray-400 mb-0.5">利润率</div>
-                <div className="font-bold text-sm text-emerald-600">{video.analysis.profitMargin || "—"}</div>
-              </div>
-              <div className="glass-card rounded-xl p-3 text-center">
-                <div className="text-xs text-gray-400 mb-0.5">竞争度</div>
-                <div className={`font-bold text-sm px-2 py-0.5 rounded-full border text-center ${competitionColor}`}>
-                  {video.analysis.competitionLevel}
-                </div>
-              </div>
-              <div className="glass-card rounded-xl p-3 text-center">
-                <div className="text-xs text-gray-400 mb-0.5">市场规模</div>
-                <div className="font-bold text-[11px] text-gray-700 leading-tight">{(video.analysis.marketSize || "待分析").split('，')[0]}</div>
-              </div>
-            </div>
-
-            {/* 爆款指数 */}
-            <TrendScore score={video.analysis.trendScore} />
           </div>
         </div>
 
-
-        {/* ===== 风险提醒 ===== */}
-        <div className="rounded-3xl p-5 md:p-7 mb-6 border border-amber-200/60 bg-amber-50/60 backdrop-blur-sm">
-          <div className="flex items-center gap-2.5 mb-4">
-            <div className="w-8 h-8 rounded-xl bg-amber-100 flex items-center justify-center shrink-0">
-              <AlertTriangle size={15} className="text-amber-600" />
-            </div>
-            <h2 className="text-base font-bold text-gray-900">风险提醒</h2>
-          </div>
-          {video.riskNotes.length > 0 ? (
-            <div className="space-y-2.5">
-              {video.riskNotes.map((note, i) => (
-                <div key={i} className="flex items-start gap-2 text-sm text-amber-800">
-                  <span className="text-amber-500 font-bold mt-0.5">!</span>
-                  <p className="leading-relaxed">{note}</p>
-                </div>
-              ))}
-            </div>
+        {/* 视频 */}
+        <div className="card-dark mt-6 overflow-hidden">
+          {video.video_source_type === 'mp4' && video.video_file_url ? (
+            <video src={video.video_file_url} controls className="max-h-[520px] w-full bg-black" poster={video.coverImage} />
           ) : (
-            <p className="text-sm text-amber-700/60 italic">暂无分析数据</p>
+            <div className="relative">
+              {video.coverImage && (
+                <div className="relative h-72 w-full">
+                  <Image src={video.coverImage} alt={video.title} fill className="object-cover" sizes="896px" />
+                </div>
+              )}
+              {video.videoUrl && (
+                <a
+                  href={video.videoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-blue absolute bottom-4 right-4 inline-flex items-center gap-1.5 px-5 py-2.5 text-sm"
+                >
+                  去 TikTok 看原视频 <ExternalLink size={14} />
+                </a>
+              )}
+            </div>
           )}
         </div>
 
-        {/* ===== CTA ===== */}
-        <div className="mb-10">
-          <CTASection
-            variant="compact"
-            subtitle="想系统化找到更多这类爆款？用我的选品工具，省去大量摸索时间"
-            primaryText="获取选品工具"
-            primaryHref="/tool"
-          />
+        {/* 核心数据 */}
+        <div className="mt-6 grid grid-cols-4 gap-4">
+          <StatCard label="市场规模" value={analysis.marketSize || '—'} />
+          <StatCard label="竞争程度" value={analysis.competitionLevel} />
+          <StatCard label="利润空间" value={analysis.profitMargin || '—'} />
+          <StatCard label="风险等级" value={verdict.riskLevel} />
         </div>
 
-        {/* ===== 相关推荐 ===== */}
-        {relatedVideos.length > 0 && (
-          <section>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-base font-bold text-gray-900">相关爆款推荐</h2>
-              <Link href="/videos" className="flex items-center gap-1 text-xs text-violet-600 font-medium">
-                查看全部 <ArrowRight size={12} />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {relatedVideos.map((v) => (
-                <VideoCard key={v.id} video={v} />
+        {/* 为什么爆 */}
+        {analysis.whyViral.length > 0 && (
+          <Section icon={<TrendingUp size={18} />} title="为什么能爆">
+            <ul className="flex flex-col gap-2.5">
+              {analysis.whyViral.map((r, i) => (
+                <li key={i} className="flex gap-2.5 text-[15px] leading-relaxed text-gray-300">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3B82F6]/15 text-xs font-bold text-[#7CB1FF]">
+                    {i + 1}
+                  </span>
+                  {r}
+                </li>
               ))}
-            </div>
-          </section>
+            </ul>
+          </Section>
         )}
 
+        {/* 目标人群 */}
+        {video.targetAudience.length > 0 && (
+          <Section icon={<Users size={18} />} title="目标人群">
+            <div className="flex flex-wrap gap-2">
+              {video.targetAudience.map((t, i) => (
+                <span key={i} className="rounded-xl bg-white/6 px-4 py-2 text-sm font-medium text-gray-300">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {/* 内容策略 */}
+        {video.contentStrategy.length > 0 && (
+          <Section icon={<Lightbulb size={18} />} title="内容策略">
+            <ul className="flex flex-col gap-2.5">
+              {video.contentStrategy.map((s, i) => (
+                <li key={i} className="flex gap-2.5 text-[15px] leading-relaxed text-gray-300">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#3B82F6]" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
+        {/* 风险提示 */}
+        {video.riskNotes.length > 0 && (
+          <Section icon={<AlertTriangle size={18} />} title="风险提示" warm>
+            <ul className="flex flex-col gap-2.5">
+              {video.riskNotes.map((r, i) => (
+                <li key={i} className="flex gap-2.5 text-[15px] leading-relaxed text-[#E8D5A0]">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#F5D77C]" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
+        {/* 阿光判断 */}
+        <div className="card-dark mt-6 p-7">
+          <h2 className="text-lg font-bold text-white">🎯 阿光判断</h2>
+          <div className="mt-4 flex items-center gap-4">
+            <span className={`rounded-full px-5 py-2 text-sm font-bold text-white ${verdict.shouldDo ? 'bg-gradient-to-r from-[#3B82F6] to-[#2563EB]' : 'bg-[#F0655A]'}`}>
+              {verdict.shouldDo ? '✓ 值得做' : '✕ 谨慎入场'}
+            </span>
+            {verdict.recommendation > 0 && (
+              <span className="text-sm font-semibold text-gray-300">推荐指数 {verdict.recommendation}/100</span>
+            )}
+          </div>
+          {verdict.targetSeller && (
+            <p className="mt-3 text-[15px] text-gray-300"><b className="text-white">适合谁做：</b>{verdict.targetSeller}</p>
+          )}
+          {verdict.contentApproach && (
+            <p className="mt-2 text-[15px] text-gray-300"><b className="text-white">内容打法：</b>{verdict.contentApproach}</p>
+          )}
+          {video.roi && (
+            <p className="mt-2 text-[15px] text-gray-300"><b className="text-white">ROI 预估：</b>{video.roi}</p>
+          )}
+        </div>
       </div>
+    </div>
+  )
+}
+
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="card-dark p-5 text-center">
+      <p className="text-lg font-black text-[#7CB1FF]">{value}</p>
+      <p className="mt-1 text-xs font-semibold text-gray-500">{label}</p>
+    </div>
+  )
+}
+
+function Section({
+  icon,
+  title,
+  warm,
+  children,
+}: {
+  icon: React.ReactNode
+  title: string
+  warm?: boolean
+  children: React.ReactNode
+}) {
+  return (
+    <div className={`card-dark mt-6 p-7 ${warm ? 'border-[#F5D77C]/25' : ''}`}>
+      <h2 className={`flex items-center gap-2 text-lg font-bold ${warm ? 'text-[#F5D77C]' : 'text-white'}`}>
+        <span className={warm ? 'text-[#F5D77C]' : 'text-[#3B82F6]'}>{icon}</span>
+        {title}
+      </h2>
+      <div className="mt-4">{children}</div>
     </div>
   )
 }

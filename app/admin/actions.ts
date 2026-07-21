@@ -45,6 +45,12 @@ function parseVideoFormData(formData: FormData) {
     riskLevel:        str(formData, "riskLevel") || "中",
     viewCount:        Number(str(formData, "viewCount")) || 0,
     likeCount:        Number(str(formData, "likeCount")) || 0,
+    commentCount:     Number(str(formData, "commentCount")) || 0,
+    account:          str(formData, "account"),
+    views24h:         str(formData, "views24h"),
+    productName:      str(formData, "productName"),
+    productPrice:     str(formData, "productPrice"),
+    estimatedGMV:     str(formData, "estimatedGMV"),
   }
 
   const sourceType = str(formData, "video_source_type") || "tiktok"
@@ -76,6 +82,15 @@ function parseVideoFormData(formData: FormData) {
 
 export async function insertVideoAction(formData: FormData) {
   const payload = parseVideoFormData(formData)
+  if (!payload.title.trim() || !payload.slug.trim() || !payload.short_description.trim()) {
+    throw new Error("请完整填写标题、Slug 和简介")
+  }
+  if (payload.video_source_type === "mp4" && !payload.video_file_url) {
+    throw new Error("请先完成 MP4 视频上传")
+  }
+  if (payload.video_source_type === "tiktok" && !payload.video_url.trim()) {
+    throw new Error("请填写 TikTok 视频链接")
+  }
   const { id, error } = await insertVideo(payload)
   if (error) throw new Error(error)
 
@@ -144,5 +159,6 @@ export async function toggleFeaturedAction(formData: FormData) {
 function revalidatePaths() {
   revalidatePath("/admin/videos")
   revalidatePath("/videos")
+  revalidatePath("/picks")
   revalidatePath("/")
 }

@@ -33,6 +33,12 @@ export interface FormDefaults {
   riskLevel?: string
   viewCount?: number
   likeCount?: number
+  commentCount?: number
+  account?: string
+  views24h?: string
+  productName?: string
+  productPrice?: string
+  estimatedGMV?: string
 }
 
 interface Props {
@@ -55,6 +61,8 @@ export default function VideoFormFields({ defaults = {} }: Props) {
         <Field label="Slug *" name="slug" required defaultValue={d.slug}
           placeholder="mini-portable-juicer-cup"
           hint="用于URL，只含小写字母和横线，不可重复" />
+        <Field label="产品或主题名称" name="productName" defaultValue={d.productName}
+          placeholder="充气日光泳池躺椅" />
         <Field label="封面图链接 *" name="cover_image" required defaultValue={d.cover_image ?? ""}
           placeholder="https://images.unsplash.com/photo-xxx?w=600&h=800&fit=crop" />
         <TwoCol>
@@ -87,12 +95,26 @@ export default function VideoFormFields({ defaults = {} }: Props) {
       {/* ── 运营数据 ── */}
       <Section title="运营数据">
         <TwoCol>
+          <Field label="创作者账号" name="account" defaultValue={d.account}
+            placeholder="@creator" />
+          <Field label="24小时增长" name="views24h" defaultValue={d.views24h}
+            placeholder="143%" />
+        </TwoCol>
+        <TwoCol>
           <Field label="利润备注" name="profit_note" defaultValue={d.profit_note ?? ""}
             placeholder="55%-65%" />
           <Field label="推荐评分（0-100）" name="recommendation_score" type="number"
             defaultValue={d.recommendation_score?.toString() ?? ""}
             placeholder="88" />
         </TwoCol>
+        <TwoCol>
+          <Field label="产品价格" name="productPrice" defaultValue={d.productPrice}
+            placeholder="$33.46" />
+          <Field label="预估 GMV" name="estimatedGMV" defaultValue={d.estimatedGMV}
+            placeholder="$126.4K" />
+        </TwoCol>
+        <Field label="评论量" name="commentCount" type="number"
+          defaultValue={d.commentCount?.toString() ?? ""} placeholder="3200" />
         <TwoCol>
           <Field label="ROI" name="roi" defaultValue={d.roi ?? ""}
             placeholder="ROI 3.2x" />

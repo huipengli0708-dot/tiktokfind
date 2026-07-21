@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
-import { getVideoById } from "@/lib/db"
+import { getVideoById, parseVideoAnalysis } from "@/lib/db"
 import { updateVideoAction } from "@/app/admin/actions"
 import VideoFormFields, { type FormDefaults } from "@/app/admin/_components/VideoFormFields"
 
@@ -15,7 +15,7 @@ export default async function EditVideoPage({ params }: Props) {
   if (!video) notFound()
 
   // 从 analysis JSONB 提取子字段，供表单回显
-  const a = (video.analysis ?? {}) as Record<string, unknown>
+  const a = parseVideoAnalysis(video.analysis)
   const defaults: FormDefaults = {
     title: video.title,
     slug: video.slug,
@@ -48,6 +48,12 @@ export default async function EditVideoPage({ params }: Props) {
     riskLevel: a.riskLevel as string | undefined,
     viewCount: a.viewCount as number | undefined,
     likeCount: a.likeCount as number | undefined,
+    commentCount: a.commentCount as number | undefined,
+    account: a.account as string | undefined,
+    views24h: a.views24h as string | undefined,
+    productName: a.productName as string | undefined,
+    productPrice: a.productPrice as string | undefined,
+    estimatedGMV: a.estimatedGMV as string | undefined,
   }
 
   return (
